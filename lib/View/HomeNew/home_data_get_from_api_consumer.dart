@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../Model/usermodel.dart';
 import '../../Provider/userprovider.dart';
 
 class HomeAPIConsumer extends StatelessWidget {
@@ -11,7 +9,7 @@ class HomeAPIConsumer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Users'),
+        title: const Text('Users'),
       ),
       body: FutureBuilder(
         future: Provider.of<UserProvider>(context, listen: false).fetchUsers(),
@@ -44,7 +42,7 @@ class HomeAPIConsumer extends StatelessWidget {
         onPressed: () {
           Provider.of<UserProvider>(context, listen: false).fetchUsers();
         },
-        child: Icon(Icons.refresh),
+        child: const Icon(Icons.refresh),
       ),
     );
   }

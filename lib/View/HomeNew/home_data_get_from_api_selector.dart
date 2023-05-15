@@ -11,7 +11,7 @@ class HomeAPISelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Users'),
+        title: const Text('Users'),
       ),
       body: FutureBuilder(
         future: Provider.of<UserProvider>(context, listen: false).fetchUsers(),
@@ -46,7 +46,7 @@ class HomeAPISelector extends StatelessWidget {
         onPressed: () {
           Provider.of<UserProvider>(context, listen: false).fetchUsers();
         },
-        child: Icon(Icons.refresh),
+        child: const Icon(Icons.refresh),
       ),
     );
   }
