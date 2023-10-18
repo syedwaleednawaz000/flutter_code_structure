@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../Model/usermodel.dart';
-import '../../Provider/userprovider.dart';
+import 'package:simple_flutter_project/Data/Model/usermodel.dart';
+import 'package:simple_flutter_project/Domain/userprovider.dart';
 
 class HomeAPISelector extends StatelessWidget {
   const HomeAPISelector({super.key});

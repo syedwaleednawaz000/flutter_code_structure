@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_flutter_project/Provider/counterprovider.dart';
-import 'package:simple_flutter_project/Utils/appimages.dart';
-import 'package:simple_flutter_project/Widget/mybutton.dart';
-import 'HomeComponent/floatbutton.dart';
+import 'package:simple_flutter_project/Domain/counterprovider.dart';
+import 'package:simple_flutter_project/Presentation/Widget/mybutton.dart';
+import 'package:simple_flutter_project/config/app_images.dart';
+import 'HomeComponent/float_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

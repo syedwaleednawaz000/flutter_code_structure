@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_flutter_project/Domain/counterprovider.dart';
+import 'package:simple_flutter_project/Domain/userprovider.dart';
+import 'Presentation/Screens/Main/selectview.dart';
 
-import 'Provider/counterprovider.dart';
-import 'Provider/userprovider.dart';
-import 'View/Home/homeview.dart';
-import 'View/HomeNew/home_data_get_from_api_consumer.dart';
-import 'View/HomeNew/home_data_get_from_api_selector.dart';
-import 'View/Main/selectview.dart';
+
 
 void main() {
   runApp(const MyApp());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../Provider/userprovider.dart';
+import 'package:simple_flutter_project/Domain/userprovider.dart';
+
 
 class HomeAPIConsumer extends StatelessWidget {
   const HomeAPIConsumer({super.key});

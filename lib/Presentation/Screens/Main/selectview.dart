@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:simple_flutter_project/View/Home/homeview.dart';
-import 'package:simple_flutter_project/View/HomeNew/home_data_get_from_api_consumer.dart';
-import 'package:simple_flutter_project/View/HomeNew/home_data_get_from_api_selector.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Home/homeview.dart';
+import 'package:simple_flutter_project/Presentation/Screens/HomeNew/home_data_get_from_api_consumer.dart';
+
+import '../HomeNew/home_data_get_from_api_selector.dart';
+
 
 class CounterScreen extends StatelessWidget {
   @override

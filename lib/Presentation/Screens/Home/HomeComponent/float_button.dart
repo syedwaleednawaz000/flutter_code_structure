@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_flutter_project/Utils/appcolor.dart';
+import 'package:simple_flutter_project/config/app_color.dart';
+
 
 class FloatButton extends StatelessWidget {
   void Function()? increment, decrement;
