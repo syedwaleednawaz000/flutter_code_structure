@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:simple_flutter_project/Utils/localization_prefs.dart';
+import 'package:simple_flutter_project/Utils/locale_prefs.dart';
 import '../l10n/support_languages.dart';
 
 class LocaleProvider with ChangeNotifier {
   /// this is the shared prefs class where i set and get data
-  LocalizationPrefs localePrefs = LocalizationPrefs();
+  LocalePrefs localePrefs = LocalePrefs();
   Locale? _locale;
 
   LocaleProvider() {
