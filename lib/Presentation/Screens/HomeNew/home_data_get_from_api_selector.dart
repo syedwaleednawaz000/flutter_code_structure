@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_flutter_project/Data/Model/usermodel.dart';
 import 'package:simple_flutter_project/Domain/userprovider.dart';
+import 'package:simple_flutter_project/Utils/utils.dart';
 
 class HomeAPISelector extends StatelessWidget {
   const HomeAPISelector({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final Color color = Utils(context).getColor;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Users'),
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Users in Selector',
+          style: TextStyle(color: color),
+        ),
       ),
       body: FutureBuilder(
         future: Provider.of<UserProvider>(context, listen: false).fetchUsers(),
@@ -32,8 +38,14 @@ class HomeAPISelector extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final user = users[index];
                       return ListTile(
-                        title: Text(user.name),
-                        subtitle: Text(user.email),
+                        title: Text(
+                          user.name,
+                          style: TextStyle(color: color),
+                        ),
+                        subtitle: Text(
+                          user.email,
+                          style: TextStyle(color: color),
+                        ),
                       );
                     },
                   );

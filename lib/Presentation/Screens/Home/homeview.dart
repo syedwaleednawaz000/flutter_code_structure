@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_flutter_project/Domain/counterprovider.dart';
 import 'package:simple_flutter_project/Presentation/Widget/mybutton.dart';
+import 'package:simple_flutter_project/Utils/utils.dart';
 import 'package:simple_flutter_project/config/app_images.dart';
 import 'HomeComponent/float_button.dart';
 
@@ -10,6 +11,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color color = Utils(context).getColor;
     return SafeArea(
       child: Scaffold(
         floatingActionButton: Consumer<CounterProvider>(
@@ -37,9 +39,14 @@ class HomeScreen extends StatelessWidget {
               Consumer<CounterProvider>(
                   builder: (context, counterProvider, child) {
                 return Text(
-                    "Counter Value ${counterProvider.counterValue.toString()}");
+                  "Counter Value ${counterProvider.counterValue.toString()}",
+                  style: TextStyle(color: color),
+                );
               }),
-              MyButton(title: "login", onTap: () {})
+              MyButton(
+                title: "login",
+                onTap: () {},
+              )
             ],
           ),
         ),
