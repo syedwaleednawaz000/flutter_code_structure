@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:simple_flutter_project/Presentation/Nav_bar_drawer/navigation_drawer_main_screen.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/homeview.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/home_data_get_from_api_consumer.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/home_data_get_from_api_selector.dart';
@@ -11,6 +12,7 @@ class MyAppRouter {
   GoRouter router = GoRouter(
     routes: [
       ///initial Route
+
       GoRoute(
         name: AppRouterConstants.selectScreen,
         path: '/',
@@ -28,6 +30,15 @@ class MyAppRouter {
         pageBuilder: (context, state) {
           return const MaterialPage(
             child: HomeScreen(),
+          );
+        },
+      ),
+      GoRoute(
+        name: AppRouterConstants.navigationDrawerMainScreen,
+        path: '/navigation_drawer_main_screen.dart',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: NavigationDrawerMainScreen(),
           );
         },
       ),
