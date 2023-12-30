@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_flutter_project/Domain/splash_provider.dart';
 import 'package:simple_flutter_project/Domain/theme_provider.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Home/homeview.dart';
-import 'package:simple_flutter_project/Presentation/Screens/HomeNew/home_data_get_from_api_consumer.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/language_drop_down.dart';
 import 'package:simple_flutter_project/Utils/app_router_constants.dart';
 import 'package:simple_flutter_project/Utils/utils.dart';
@@ -19,6 +18,7 @@ class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final splashProvider = Provider.of<SplashProvider>(context);
     final Color color = Utils(context).getColor;
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +45,11 @@ class _CounterScreenState extends State<CounterScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
-              onPressed: () => context.pushNamed(AppRouterConstants.counter),
+              onPressed: () {
+                context.pushNamed(AppRouterConstants.counter);
+                splashProvider.getCurrentScreen;
+                setState(() {});
+              },
               child: Text(
                 AppLocalizations.of(context)!.counterText,
                 style: TextStyle(color: color),
@@ -55,7 +59,11 @@ class _CounterScreenState extends State<CounterScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
-              onPressed: () => context.pushNamed(AppRouterConstants.consumer),
+              onPressed: () {
+                context.pushNamed(AppRouterConstants.consumer);
+                splashProvider.getCurrentScreen;
+                setState(() {});
+              },
               child: Text(
                 AppLocalizations.of(context)!.consumerText,
                 style: TextStyle(color: color),
@@ -65,7 +73,11 @@ class _CounterScreenState extends State<CounterScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
-              onPressed: () => context.pushNamed(AppRouterConstants.selector),
+              onPressed: () {
+                context.pushNamed(AppRouterConstants.selector);
+                splashProvider.getCurrentScreen;
+                setState(() {});
+              },
               child: Text(
                 AppLocalizations.of(context)!.selectorText,
                 style: TextStyle(color: color),

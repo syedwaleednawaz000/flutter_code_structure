@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalePrefs {
+class LocalizationPrefs {
   static const SELECTED_LANG = "SELECTEDLANGUAGE";
 
   setLanguage(Locale locale) async {
