@@ -18,7 +18,6 @@ class CounterScreen extends StatefulWidget {
 class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
-    final Color color = AppConstant(context).getColor;
     return Scaffold(
       body: Center(
         child: Column(
@@ -30,7 +29,7 @@ class _CounterScreenState extends State<CounterScreen> {
               children: [
                 Text(
                   'Select Language',
-                  style: TextStyle(color: color),
+                  style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
                 const LanguageDropDown(),
               ],
@@ -66,7 +65,7 @@ class _CounterScreenState extends State<CounterScreen> {
               },
               child: Text(
                 'Go to New Code',
-                style: TextStyle(color: color),
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
           ],

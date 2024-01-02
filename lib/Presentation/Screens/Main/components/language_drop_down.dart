@@ -16,40 +16,41 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
   @override
   @override
   Widget build(BuildContext context) {
-    final localeProvider = Provider.of<LocaleProvider>(context);
-    final Color color = AppConstant(context).getColor;
+
 
     return DropdownButtonHideUnderline(
-      child: DropdownButton(
-        value: localeProvider.locale,
-        icon: Icon(
-          Icons.arrow_drop_down_sharp,
-          size: 50,
-          color: color,
-          weight: 100,
-        ),
-        items: SupportLanguages.languages.map(
-          (e) {
-            return DropdownMenuItem(
-              value: e,
-              onTap: () {
-                // final provider =
-                //     Provider.of<LocaleProvider>(context, listen: false);
-                localeProvider.setLocale(e);
-              },
-              child: Center(
-                child: Text(
-                  e.toString(),
-                  style: TextStyle(fontSize: 32, color: color),
+      child: Consumer<LocaleProvider>(builder:  (context, localeProvider, child) {
+        return DropdownButton(
+          value: localeProvider.locale,
+          icon: Icon(
+            Icons.arrow_drop_down_sharp,
+            size: 50,
+            color:  Theme.of(context).primaryColor,
+            weight: 100,
+          ),
+          items: SupportLanguages.languages.map(
+                (newValue) {
+              return DropdownMenuItem(
+                value: newValue,
+                onTap: () {
+                  // final provider = Provider.of<LocaleProvider>(context, listen: false);
+                  // localeProvider.setLocale(e);
+                  Provider.of<LocaleProvider>(context, listen: false).setLocale(newValue);
+                },
+                child: Center(
+                  child: Text(
+                    newValue.toString(),
+                    style: TextStyle(fontSize: 32, color:  Theme.of(context).primaryColor),
+                  ),
                 ),
-              ),
-            );
+              );
+            },
+          ).toList(),
+          onChanged: (locale) {
+            Provider.of<LocaleProvider>(context, listen: false).setLocale(locale!);
           },
-        ).toList(),
-        onChanged: (locale) {
-          localeProvider.setLocale(locale!);
-        },
-      ),
+        );
+      },),
     );
   }
 }

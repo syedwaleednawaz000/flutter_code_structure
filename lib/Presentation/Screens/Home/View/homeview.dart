@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = AppConstant(context).getColor;
+    // final Color color = AppConstant(context).getColor;
     return SafeArea(
       child: Scaffold(
         floatingActionButton: Consumer<CounterProvider>(
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                   builder: (context, counterProvider, child) {
                 return Text(
                   "Counter Value ${counterProvider.counterValue.toString()}",
-                  style: TextStyle(color: color),
+                  style: TextStyle(color:  Theme.of(context).primaryColor),
                 );
               }),
               MyButton(

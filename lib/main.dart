@@ -24,26 +24,8 @@ void main() async {
   );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  ThemeProvider themeChangeProvider = ThemeProvider();
-
-  void getCurrentAppTheme() async {
-    themeChangeProvider.setDarkTheme =
-        await themeChangeProvider.darkThemePreferences.getTheme();
-  }
-
-  @override
-  void initState() {
-    getCurrentAppTheme();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,36 +38,38 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => SplashProvider()),
       ],
       child: Builder(builder: (BuildContext context) {
-        final themeChangeProvider = Provider.of<ThemeProvider>(context);
+        // final themeChangeProvider = Provider.of<ThemeNotifier>(context);
         final localeProvider = Provider.of<LocaleProvider>(context);
-        return ScreenUtilInit(
-          designSize: const Size(393, 852),
-          minTextAdapt: true,
-          splitScreenMode: true,
-          builder: (context, child) {
-            return MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              title: 'Flutter code structure',
-              theme:
-                  Styles.themeData(themeChangeProvider.getDarkTheme, context),
-              locale: localeProvider.locale,
+        return Consumer<ThemeProvider>(builder: (context, value, child) {
+          return ScreenUtilInit(
+            designSize: const Size(393, 852),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (context, child) {
+              final themeProvider = Provider.of<ThemeProvider>(context);
+              return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                title: 'Flutter code structure',
+                theme: themeProvider.getTheme(),
+                locale: localeProvider.locale,
 
-              ///localization aspects
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: SupportLanguages.languages,
-              routerConfig: MyAppRouter().router,
+                ///localization aspects
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: SupportLanguages.languages,
+                routerConfig: MyAppRouter().router,
 
-              // routerConfigs:
-            );
-            // child: const SplashScreen()
-          },
-          // child: CounterScreen(),
-        );
+                // routerConfigs:
+              );
+              // child: const SplashScreen()
+            },
+            // child: CounterScreen(),
+          );
+        },);
       }),
     );
   }

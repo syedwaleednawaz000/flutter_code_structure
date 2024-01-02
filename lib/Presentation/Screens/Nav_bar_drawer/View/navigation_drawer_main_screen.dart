@@ -23,7 +23,7 @@ class _NavigationDrawerMainScreenState
 
   int _currentIndex = 0;
   final List<dynamic> _screens = [
-    CounterScreen(),
+    const CounterScreen(),
     const HomeScreen(),
     const HomeAPIConsumer(),
     const HomeAPISelector(),

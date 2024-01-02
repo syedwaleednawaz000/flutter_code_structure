@@ -18,7 +18,7 @@ class MyAppRouter {
         name: AppRouterConstants.selectScreen,
         path: '/',
         pageBuilder: (context, state) {
-          return MaterialPage(
+          return const MaterialPage(
             child: CounterScreen(),
           );
         },

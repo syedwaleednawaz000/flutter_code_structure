@@ -8,12 +8,12 @@ class HomeAPIConsumer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = AppConstant(context).getColor;
+    // final Color color = AppConstant(context).getColor;
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Users in Consumer',
-          style: TextStyle(color: color),
+          style: TextStyle(color:  Theme.of(context).primaryColor),
         ),
         backgroundColor: Colors.transparent,
       ),
@@ -38,11 +38,11 @@ class HomeAPIConsumer extends StatelessWidget {
                   return ListTile(
                     title: Text(
                       user.name,
-                      style: TextStyle(color: color),
+                      style: TextStyle(color:  Theme.of(context).primaryColor),
                     ),
                     subtitle: Text(
                       user.email,
-                      style: TextStyle(color: color),
+                      style: TextStyle(color:  Theme.of(context).primaryColor),
                     ),
                   );
                 },

@@ -10,13 +10,13 @@ class HomeAPISelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = AppConstant(context).getColor;
+    // final Color color = AppConstant(context).getColor;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
           'Users in Selector',
-          style: TextStyle(color: color),
+          style: TextStyle(color: Theme.of(context).primaryColor),
         ),
       ),
       body: FutureBuilder(
@@ -41,11 +41,11 @@ class HomeAPISelector extends StatelessWidget {
                       return ListTile(
                         title: Text(
                           user.name,
-                          style: TextStyle(color: color),
+                          style: TextStyle(color:  Theme.of(context).primaryColor),
                         ),
                         subtitle: Text(
                           user.email,
-                          style: TextStyle(color: color),
+                          style: TextStyle(color:  Theme.of(context).primaryColor),
                         ),
                       );
                     },
