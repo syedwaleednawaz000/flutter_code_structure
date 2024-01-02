@@ -2,42 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_flutter_project/Presentation/Theme/app_style.dart';
 
-
+// Provider class for managing the theme
 class ThemeProvider with ChangeNotifier {
+  // Dark theme configuration
   final darkTheme = ThemeData(
-      primaryColor: const Color(0xffE1E1E1),
-      cardColor: const Color(0xff000000),
+    // Theme properties for dark mode
+  );
 
-      scaffoldBackgroundColor: const Color(0xffffffff),
-      // buttonColor: const Color(0xff434242),
-      textTheme: const TextTheme(bodyText1: TextStyle(color: Color(0xffffffff))),
-      shadowColor: Colors.black,
-      highlightColor: Colors.white,
-      // Icons BG Color
-      dialogBackgroundColor: const Color(0xffD9D9D9),
-
-      indicatorColor: const Color(0xffD9D9D9),
-      dividerColor: Colors.white,
-      hintColor: Colors.white,);
-
+  // Light theme configuration
   final lightTheme = ThemeData(
-    // fontFamily: AppConstant.LightFont,
-      primaryColor: const Color(0xff161A26),
-      cardColor: const Color(0xffF2F2F2),
-      scaffoldBackgroundColor: const Color(0xff353535),
-      // buttonColor: Color(0xff434242),
-      textTheme: const TextTheme(bodyText1: TextStyle(color: Color(0x0fffffff))),
-      shadowColor: Colors.white,
-      canvasColor: Colors.white,
-      // Icons BG Color
-      dialogBackgroundColor: const Color(0x54888888),
-      hintColor: Colors.white,
-      // accentColor: const Color(0xff283349),
-      indicatorColor: const Color(0xff283349),
-      dividerColor: Colors.white,);
+    // Theme properties for light mode
+  );
+
   ThemeData? _themeData;
   ThemeData? getTheme() => _themeData;
-  //Todo my code
+
+  // Initialize the theme based on the saved preference during class instantiation
   ThemeProvider() {
     getStoreValue().then((themeBoolValue) {
       var themeMode = themeBoolValue ?? true; // Change the default to true (dark theme)
@@ -52,8 +32,9 @@ class ThemeProvider with ChangeNotifier {
 
   bool? _setTheme;
 
-  // bool? gettTheme() => _setTheme;
+  bool? gettTheme() => _setTheme;
 
+  // Retrieve the saved theme preference from SharedPreferences
   Future<bool?> getStoreValue() async {
     final prefs = await SharedPreferences.getInstance();
     var themeBoolValue = prefs.getBool("themeValue");
@@ -66,24 +47,27 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
     return themeBoolValue;
   }
+
+  // Set the selected theme and persist the preference to SharedPreferences
   void setTheme({required bool themeValue}) async {
     _setTheme = themeValue;
     AppStyle.themValue = themeValue;
-    notifyListeners();
     if (themeValue == false) {
       _themeData = lightTheme;
       StorageManager.saveData('themeMode', themeValue);
+      notifyListeners();
     } else {
       _themeData = darkTheme;
       StorageManager.saveData('themeMode', themeValue);
+      notifyListeners();
     }
+    // notifyListeners();
   }
-
 }
 
-
+// Class for managing storage using SharedPreferences
 class StorageManager {
-  static void saveData(String key,value) async {
+  static void saveData(String key, value) async {
     final prefs = await SharedPreferences.getInstance();
     if (value is int) {
       prefs.setInt(key, value);
@@ -92,6 +76,7 @@ class StorageManager {
     } else if (value is bool) {
       prefs.setBool(key, value);
     } else {
+      // Handle other data types if needed
     }
   }
 

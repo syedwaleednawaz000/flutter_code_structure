@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_flutter_project/Domain/theme_provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/View/homeview.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_data_get_from_api_consumer.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/language_drop_down.dart';
@@ -16,28 +18,51 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen> {
+  bool isDarkMode = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
+              return             Switch(
+                value: themeProvider.gettTheme() ?? false,
+                onChanged: (value) {
+                  setState(() {
+                    isDarkMode = value;
+                  });
+                  themeProvider.setTheme(themeValue: value);
+                  // if(isDarkMode == true){
+                  //   themeProvider.darkTheme;
+                  //   // ThemeProvider
+                  // }else{
+                  //   themeProvider.lightTheme;
+                  // }
+                  // Change theme based on the switch value
+                  // Theme.of(context).brightness == Brightness.light
+                  // ? Theme.of(context).brightness = Brightness.dark
+                  // : Theme.of(context).brightness = Brightness.light;
+                },
+              );
+            },),
             /// this is abid drop down for language localization
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  'Select Language',
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
-                const LanguageDropDown(),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     Text(
+            //       'Select Language',
+            //       style: TextStyle(color: Theme.of(context).primaryColor),
+            //     ),
+            //     const LanguageDropDown(),
+            //   ],
+            // ),
             ElevatedButton(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => HomeScreen()),
+                MaterialPageRoute(builder: (_) => const HomeScreen()),
               ),
               child: const Text('Counter'),
             ),
@@ -57,11 +82,10 @@ class _CounterScreenState extends State<CounterScreen> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
+                backgroundColor: Theme.of(context).primaryColor,
               ),
               onPressed: () {
-                context
-                    .pushNamed(AppRouterConstants.navigationDrawerMainScreen);
+                context.pushNamed(AppRouterConstants.navigationDrawerMainScreen);
               },
               child: Text(
                 'Go to New Code',
