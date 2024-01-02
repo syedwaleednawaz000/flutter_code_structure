@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Home/homeview.dart';
-import 'package:simple_flutter_project/Presentation/Screens/HomeNew/home_data_get_from_api_consumer.dart';
-import 'package:simple_flutter_project/Presentation/Screens/HomeNew/home_data_get_from_api_selector.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_bottom_nav_bar.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Main/selectview.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Home/View/homeview.dart';
+import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_data_get_from_api_consumer.dart';
+import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_data_get_from_api_selector.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Nav_bar_drawer/Component/custom_bottom_nav_bar.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/View/selectview.dart';
 
-import '../Screens/Main/components/custom_app_bar.dart';
-import '../Screens/Main/components/custom_drawer.dart';
+
 
 class NavigationDrawerMainScreen extends StatefulWidget {
   const NavigationDrawerMainScreen({super.key});
@@ -43,8 +44,8 @@ class _NavigationDrawerMainScreenState
       ),
 
       /// this is abid custom drawer widget
-      drawer: CustomDrawer(),
-      bottomNavigationBar: CustomBottonNavBar(
+      drawer: const CustomDrawer(),
+      bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {

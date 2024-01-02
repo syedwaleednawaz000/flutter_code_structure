@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Main/selectview.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/View/selectview.dart';
 
-class CustomBottonNavBar extends StatefulWidget {
+class CustomBottomNavBar extends StatefulWidget {
   int currentIndex;
   final Function(int) onTap;
 
-  CustomBottonNavBar({required this.currentIndex, required this.onTap});
+  CustomBottomNavBar({super.key, required this.currentIndex, required this.onTap});
 
   @override
-  State<CustomBottonNavBar> createState() => _CustomBottonNavBarState();
+  State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
 }
 
-class _CustomBottonNavBarState extends State<CustomBottonNavBar> {
+class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -22,7 +22,7 @@ class _CustomBottonNavBarState extends State<CustomBottonNavBar> {
       showUnselectedLabels: true,
       selectedFontSize: 18,
       selectedItemColor: Colors.blue,
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.countertops),
           label: 'Counter',

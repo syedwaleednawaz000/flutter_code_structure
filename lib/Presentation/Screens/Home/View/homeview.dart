@@ -4,7 +4,7 @@ import 'package:simple_flutter_project/Domain/counterprovider.dart';
 import 'package:simple_flutter_project/Presentation/Widget/mybutton.dart';
 import 'package:simple_flutter_project/Utils/utils.dart';
 import 'package:simple_flutter_project/config/app_images.dart';
-import 'HomeComponent/float_button.dart';
+import '../HomeComponent/float_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

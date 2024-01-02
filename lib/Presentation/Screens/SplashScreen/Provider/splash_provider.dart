@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Utils/splash_prefs.dart';
+import '../../../../Utils/splash_prefs.dart';
 
 class SplashProvider with ChangeNotifier {
   /// this is the shared prefs class where i set and get data

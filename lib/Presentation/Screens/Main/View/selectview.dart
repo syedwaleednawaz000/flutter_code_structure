@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Home/homeview.dart';
-import 'package:simple_flutter_project/Presentation/Screens/HomeNew/home_data_get_from_api_consumer.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Home/View/homeview.dart';
+import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_data_get_from_api_consumer.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/language_drop_down.dart';
 import 'package:simple_flutter_project/Utils/app_router_constants.dart';
 import 'package:simple_flutter_project/Utils/utils.dart';
-import '../HomeNew/home_data_get_from_api_selector.dart';
+import '../../HomeNew/View/home_data_get_from_api_selector.dart';
 
 class CounterScreen extends StatefulWidget {
   @override
