@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../Utils/splash_prefs.dart';
-
 class SplashProvider with ChangeNotifier {
   static const currentScreen = "currentScreen";
   String? _currentScreen;

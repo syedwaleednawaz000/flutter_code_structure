@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../Utils/global_color.dart';
-
 ///first create this data , then datk theme preferences in services
 
 class Styles {
