@@ -1,25 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/homeview.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/home_data_get_from_api_consumer.dart';
-
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/language_drop_down.dart';
+import 'package:simple_flutter_project/Utils/app_router_constants.dart';
+import 'package:simple_flutter_project/Utils/utils.dart';
 import '../HomeNew/home_data_get_from_api_selector.dart';
 
+class CounterScreen extends StatefulWidget {
+  @override
+  State<CounterScreen> createState() => _CounterScreenState();
+}
 
-class CounterScreen extends StatelessWidget {
+class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
+    final Color color = Utils(context).getColor;
     return Scaffold(
-      appBar: AppBar(title: Text('Counter Screen')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            /// this is abid drop down for language localization
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  'Select Language',
+                  style: TextStyle(color: color),
+                ),
+                const LanguageDropDown(),
+              ],
+            ),
             ElevatedButton(
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => HomeScreen()),
               ),
-              child:const  Text('Counter'),
+              child: const Text('Counter'),
             ),
             ElevatedButton(
               onPressed: () => Navigator.push(
@@ -34,6 +52,19 @@ class CounterScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => const HomeAPISelector()),
               ),
               child: const Text('Selector'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
+              onPressed: () {
+                context
+                    .pushNamed(AppRouterConstants.navigationDrawerMainScreen);
+              },
+              child: Text(
+                'Go to New Code',
+                style: TextStyle(color: color),
+              ),
             ),
           ],
         ),
