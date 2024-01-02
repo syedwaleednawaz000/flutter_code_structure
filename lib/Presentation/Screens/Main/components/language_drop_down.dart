@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_flutter_project/Utils/utils.dart';
+
+import 'package:simple_flutter_project/config/app_constant.dart';
 import '../../../../Domain/localization_provider.dart';
 import '../../../../l10n/support_languages.dart';
 
@@ -16,7 +17,7 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
   @override
   Widget build(BuildContext context) {
     final localeProvider = Provider.of<LocaleProvider>(context);
-    final Color color = Utils(context).getColor;
+    final Color color = AppConstant(context).getColor;
 
     return DropdownButtonHideUnderline(
       child: DropdownButton(

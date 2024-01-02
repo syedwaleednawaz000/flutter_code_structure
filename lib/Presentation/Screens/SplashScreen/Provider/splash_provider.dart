@@ -4,8 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../Utils/splash_prefs.dart';
 
 class SplashProvider with ChangeNotifier {
-  /// this is the shared prefs class where i set and get data
-  SplashPrefs splashPrefs = SplashPrefs();
+  static const currentScreen = "currentScreen";
   String? _currentScreen;
 
   SplashProvider() {
@@ -15,10 +14,10 @@ class SplashProvider with ChangeNotifier {
 
   get getCurrentScreen => _currentScreen;
 
-  void setScreen(String crntScreen) {
+  void setScreen(String currentScreen) {
     ///we don't accept other locales(languages without defined in all )
-    _currentScreen = crntScreen;
-    splashPrefs.setScreen(crntScreen);
+    _currentScreen = currentScreen;
+    _setScreen(currentScreen);
     notifyListeners();
   }
 
@@ -28,7 +27,19 @@ class SplashProvider with ChangeNotifier {
   }
 
   loadScreen() async {
-    _currentScreen = await splashPrefs.getScreen();
+    _currentScreen = await _getScreen();
     notifyListeners();
+  }
+
+
+
+  void _setScreen(String currentScreen) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(currentScreen, currentScreen);
+  }
+
+  Future<String> _getScreen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(currentScreen) ?? " ";
   }
 }

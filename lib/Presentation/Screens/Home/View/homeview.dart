@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_flutter_project/Domain/counterprovider.dart';
-import 'package:simple_flutter_project/Presentation/Widget/mybutton.dart';
-import 'package:simple_flutter_project/Utils/utils.dart';
+import 'package:simple_flutter_project/Domain/counter_provider.dart';
+import 'package:simple_flutter_project/Presentation/Widget/my_button.dart';
+import 'package:simple_flutter_project/config/app_constant.dart';
 import 'package:simple_flutter_project/config/app_images.dart';
 import '../HomeComponent/float_button.dart';
 
@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = Utils(context).getColor;
+    final Color color = AppConstant(context).getColor;
     return SafeArea(
       child: Scaffold(
         floatingActionButton: Consumer<CounterProvider>(

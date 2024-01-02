@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_flutter_project/Domain/userprovider.dart';
-import 'package:simple_flutter_project/Utils/utils.dart';
+import 'package:simple_flutter_project/Domain/user_provider.dart';
+import 'package:simple_flutter_project/config/app_constant.dart';
 
 class HomeAPIConsumer extends StatelessWidget {
   const HomeAPIConsumer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Color color = Utils(context).getColor;
+    final Color color = AppConstant(context).getColor;
     return Scaffold(
       appBar: AppBar(
         title: Text(

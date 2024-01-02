@@ -1,14 +1,13 @@
 import 'package:flutter/widgets.dart';
-import 'package:simple_flutter_project/Utils/localization_prefs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../l10n/support_languages.dart';
 
 class LocaleProvider with ChangeNotifier {
-  /// this is the shared prefs class where i set and get data
-  LocalizationPrefs localePrefs = LocalizationPrefs();
+
   Locale? _locale;
 
   LocaleProvider() {
-    // Load theme status when ThemeProvider is created
     loadLocale();
   }
 
@@ -19,7 +18,7 @@ class LocaleProvider with ChangeNotifier {
     if (!SupportLanguages.languages.contains(locale)) return;
 
     _locale = locale;
-    localePrefs.setLanguage(locale);
+    _setLanguage(locale);
     notifyListeners();
   }
 
@@ -29,8 +28,19 @@ class LocaleProvider with ChangeNotifier {
   }
 
   Future<void> loadLocale() async {
-    String savedLanguage = await localePrefs.getLanguage();
+    String savedLanguage = await _getLanguage();
     _locale = Locale(savedLanguage);
     notifyListeners();
+  }
+  static const selectLanguage = "selectLanguage";
+
+  void _setLanguage(Locale locale) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(selectLanguage, locale.languageCode);
+  }
+
+  Future<String> _getLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(selectLanguage) ?? " ";
   }
 }

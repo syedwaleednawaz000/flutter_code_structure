@@ -24,9 +24,9 @@ class _NavigationDrawerMainScreenState
   int _currentIndex = 0;
   final List<dynamic> _screens = [
     CounterScreen(),
-    HomeScreen(),
-    HomeAPIConsumer(),
-    HomeAPISelector(),
+    const HomeScreen(),
+    const HomeAPIConsumer(),
+    const HomeAPISelector(),
   ];
 
   @override
@@ -35,7 +35,7 @@ class _NavigationDrawerMainScreenState
       key: _scaffoldKey,
 
       /// this is abid custom app bar
-      appBar: CustomAppBar(
+      appBar: customAppBar(
         appBarText: 'This is Counter Screen',
         leadingIcon: Icons.menu,
         onPressed: () {

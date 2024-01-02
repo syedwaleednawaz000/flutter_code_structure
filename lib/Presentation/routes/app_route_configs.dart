@@ -5,7 +5,7 @@ import 'package:simple_flutter_project/Presentation/Screens/Home/View/homeview.d
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_data_get_from_api_consumer.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_data_get_from_api_selector.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Nav_bar_drawer/View/navigation_drawer_main_screen.dart';
-import 'package:simple_flutter_project/Utils/app_router_constants.dart';
+import 'package:simple_flutter_project/config/app_router_constants.dart';
 
 import '../Screens/Main/View/selectview.dart';
 
@@ -27,7 +27,7 @@ class MyAppRouter {
       ///second route
       GoRoute(
         name: AppRouterConstants.counter,
-        path: '/homeview',
+        path: '/homeView',
         pageBuilder: (context, state) {
           return const MaterialPage(
             child: HomeScreen(),

@@ -5,7 +5,7 @@ class ListTileWidget extends StatelessWidget {
   IconData? leadingIcon;
   VoidCallback? onPressed;
   ListTileWidget(
-      {required this.text, this.leadingIcon, required this.onPressed});
+      {super.key, required this.text, this.leadingIcon, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

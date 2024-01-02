@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_flutter_project/Data/Model/usermodel.dart';
-import 'package:simple_flutter_project/Domain/userprovider.dart';
-import 'package:simple_flutter_project/Utils/utils.dart';
+import 'package:simple_flutter_project/Data/Model/user_model.dart';
+import 'package:simple_flutter_project/Domain/user_provider.dart';
+
+import 'package:simple_flutter_project/config/app_constant.dart';
 
 class HomeAPISelector extends StatelessWidget {
   const HomeAPISelector({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Color color = Utils(context).getColor;
+    final Color color = AppConstant(context).getColor;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

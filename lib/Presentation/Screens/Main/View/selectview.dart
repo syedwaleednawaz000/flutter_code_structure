@@ -3,11 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/View/homeview.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_data_get_from_api_consumer.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/language_drop_down.dart';
-import 'package:simple_flutter_project/Utils/app_router_constants.dart';
+import 'package:simple_flutter_project/config/app_constant.dart';
+import 'package:simple_flutter_project/config/app_router_constants.dart';
 import 'package:simple_flutter_project/Utils/utils.dart';
 import '../../HomeNew/View/home_data_get_from_api_selector.dart';
 
 class CounterScreen extends StatefulWidget {
+  const CounterScreen({super.key});
+
   @override
   State<CounterScreen> createState() => _CounterScreenState();
 }
@@ -15,7 +18,7 @@ class CounterScreen extends StatefulWidget {
 class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
-    final Color color = Utils(context).getColor;
+    final Color color = AppConstant(context).getColor;
     return Scaffold(
       body: Center(
         child: Column(

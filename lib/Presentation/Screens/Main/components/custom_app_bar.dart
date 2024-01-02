@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-AppBar CustomAppBar(
+AppBar customAppBar(
     {required String appBarText,
     required IconData leadingIcon,
     required VoidCallback onPressed}) {
