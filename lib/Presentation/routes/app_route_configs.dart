@@ -19,7 +19,7 @@ class MyAppRouter {
         path: '/',
         pageBuilder: (context, state) {
           return const MaterialPage(
-            child: CounterScreen(),
+            child: NavigationDrawerMainScreen(),
           );
         },
       ),
@@ -30,7 +30,7 @@ class MyAppRouter {
         path: '/homeView',
         pageBuilder: (context, state) {
           return const MaterialPage(
-            child: HomeScreen(),
+            child: CounterScreen(),
           );
         },
       ),

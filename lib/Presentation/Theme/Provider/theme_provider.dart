@@ -1,24 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_flutter_project/Presentation/Theme/app_style.dart';
+import '../../../config/app_constant.dart';
 
-// Provider class for managing the theme
-class ThemeProvider with ChangeNotifier {
-  // Dark theme configuration
+class ThemeNotifier with ChangeNotifier {
   final darkTheme = ThemeData(
-    // Theme properties for dark mode
-  );
+    // fontFamily: AppConstant.LightFont,
+      primaryColor: const Color(0xffE1E1E1),
+      cardColor: const Color(0xff000000),
+      // Feild, Card
+      backgroundColor: Color(0xff000000),
+      scaffoldBackgroundColor: const Color(0xffffffff),
+      // buttonColor: const Color(0xff434242),
+      textTheme: TextTheme(bodyText1: TextStyle(color: Color(0xffffffff))),
+      shadowColor: Colors.black,
+      // canvasColor: AppColors.primarybtn,
+      // Button Color
+      highlightColor: Colors.white,
+      // Icons BG Color
+      dialogBackgroundColor: Color(0xffD9D9D9),
+      toggleableActiveColor: const Color(0xffD9D9D9),
+      // accentColor: const Color(0xffD9D9D9),
+      indicatorColor: const Color(0xffD9D9D9),
+      dividerColor: Colors.white,
+      hintColor: Colors.white,
+      bottomAppBarColor: Colors.black);
 
-  // Light theme configuration
   final lightTheme = ThemeData(
-    // Theme properties for light mode
-  );
+    // fontFamily: AppConstant.LightFont,
+      primaryColor: const Color(0xff161A26),
+      cardColor: const Color(0xffF2F2F2),
+      //F2F2F2 Feild, Card
+      backgroundColor: Color(0xffffffff),
+      scaffoldBackgroundColor: const Color(0xff353535),
+      // buttonColor: Color(0xff434242),
+      textTheme: TextTheme(bodyText1: TextStyle(color: Color(0xfffffff))),
+      shadowColor: Colors.white,
+      canvasColor: Colors.white,
+      // Button Color, Drawar Icons Color
+      // highlightColor: AppColors.primarybtn,
+      // Icons BG Color
+      dialogBackgroundColor: Color(0x54888888),
+      toggleableActiveColor: const Color(0xff283349),
+      hintColor: Colors.white,
+      // accentColor: const Color(0xff283349),
+      indicatorColor: const Color(0xff283349),
+      dividerColor: Colors.white,
+      bottomAppBarColor: Color(0xffffffff));
 
   ThemeData? _themeData;
-  ThemeData? getTheme() => _themeData;
 
-  // Initialize the theme based on the saved preference during class instantiation
-  ThemeProvider() {
+  ThemeData? getTheme() => _themeData;
+  //Todo my code
+  ThemeNotifier() {
     getStoreValue().then((themeBoolValue) {
       var themeMode = themeBoolValue ?? true; // Change the default to true (dark theme)
       if (themeMode == false) {
@@ -34,7 +67,6 @@ class ThemeProvider with ChangeNotifier {
 
   bool? gettTheme() => _setTheme;
 
-  // Retrieve the saved theme preference from SharedPreferences
   Future<bool?> getStoreValue() async {
     final prefs = await SharedPreferences.getInstance();
     var themeBoolValue = prefs.getBool("themeValue");
@@ -43,31 +75,27 @@ class ThemeProvider with ChangeNotifier {
       themeBoolValue = true;
       await prefs.setBool("themeValue", true);
     }
-    AppStyle.themValue = themeBoolValue;
+    AppConstant.themValue = themeBoolValue;
     notifyListeners();
     return themeBoolValue;
   }
-
-  // Set the selected theme and persist the preference to SharedPreferences
   void setTheme({required bool themeValue}) async {
     _setTheme = themeValue;
-    AppStyle.themValue = themeValue;
+    AppConstant.themValue = themeValue;
+    notifyListeners();
     if (themeValue == false) {
       _themeData = lightTheme;
       StorageManager.saveData('themeMode', themeValue);
-      notifyListeners();
     } else {
       _themeData = darkTheme;
       StorageManager.saveData('themeMode', themeValue);
-      notifyListeners();
     }
-    // notifyListeners();
   }
+
 }
 
-// Class for managing storage using SharedPreferences
 class StorageManager {
-  static void saveData(String key, value) async {
+  static void saveData(String key,value) async {
     final prefs = await SharedPreferences.getInstance();
     if (value is int) {
       prefs.setInt(key, value);
@@ -76,7 +104,6 @@ class StorageManager {
     } else if (value is bool) {
       prefs.setBool(key, value);
     } else {
-      // Handle other data types if needed
     }
   }
 

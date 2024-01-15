@@ -27,10 +27,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           icon: Icon(Icons.countertops),
           label: 'Counter',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
+
         BottomNavigationBarItem(
           icon: Icon(Icons.construction),
           label: 'Consumer',
@@ -38,6 +35,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         BottomNavigationBarItem(
           icon: Icon(Icons.select_all),
           label: 'Selector',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Profile',
         ),
       ],
     );

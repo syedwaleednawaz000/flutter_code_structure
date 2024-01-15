@@ -6,8 +6,8 @@ import 'package:simple_flutter_project/config/app_constant.dart';
 import 'package:simple_flutter_project/config/app_images.dart';
 import '../HomeComponent/float_button.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class CounterScreen extends StatelessWidget {
+  const CounterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

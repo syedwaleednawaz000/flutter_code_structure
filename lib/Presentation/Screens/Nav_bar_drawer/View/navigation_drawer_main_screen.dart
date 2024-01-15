@@ -5,9 +5,7 @@ import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_da
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Nav_bar_drawer/Component/custom_bottom_nav_bar.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Main/View/selectview.dart';
-
-
+import 'package:simple_flutter_project/Presentation/Screens/profile/profile.dart';
 
 class NavigationDrawerMainScreen extends StatefulWidget {
   const NavigationDrawerMainScreen({super.key});
@@ -21,12 +19,12 @@ class _NavigationDrawerMainScreenState
     extends State<NavigationDrawerMainScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  int _currentIndex = 0;
+  int _currentIndex = 3;
   final List<dynamic> _screens = [
     const CounterScreen(),
-    const HomeScreen(),
     const HomeAPIConsumer(),
     const HomeAPISelector(),
+    const ProfileScreen()
   ];
 
   @override
