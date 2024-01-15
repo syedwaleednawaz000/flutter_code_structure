@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_flutter_project/Data/Model/user_model.dart';
-import 'package:simple_flutter_project/Domain/user_provider.dart';
+import 'package:simple_flutter_project/Presentation/Screens/HomeNew/Model/user_model.dart';
+import 'package:simple_flutter_project/Presentation/Screens/HomeNew/Provider/user_provider.dart';
 
 import 'package:simple_flutter_project/config/app_constant.dart';
 

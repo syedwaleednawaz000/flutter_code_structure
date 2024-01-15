@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class CounterProvider extends ChangeNotifier{
   int counterValue = 0;
   Future<void> increment()async{

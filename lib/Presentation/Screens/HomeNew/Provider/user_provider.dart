@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:http/http.dart' as http;
-import 'package:simple_flutter_project/Data/Model/user_model.dart';
+import 'package:simple_flutter_project/Presentation/Screens/HomeNew/Model/user_model.dart';
 import 'package:simple_flutter_project/Data/repositories/api_service.dart';
 
 

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../l10n/support_languages.dart';
+import '../support_languages.dart';
 
 class LocaleProvider with ChangeNotifier {
   // Key for storing selected language in shared preferences

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../Domain/localization_provider.dart';
+import '../../../../l10n/Provider/localization_provider.dart';
 import '../../../../l10n/support_languages.dart';
 
 class LanguageDropDown extends StatefulWidget {
