@@ -20,7 +20,7 @@ class _NavigationDrawerMainScreenState
     extends State<NavigationDrawerMainScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  int _currentIndex = 3;
+  int _currentIndex = 0;
   final List<dynamic> _screens = [
     const CounterScreen(),
     const HomeAPIConsumer(),
