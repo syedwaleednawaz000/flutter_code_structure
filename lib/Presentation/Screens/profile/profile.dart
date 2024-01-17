@@ -6,7 +6,9 @@ import '../../../config/app_constant.dart';
 import '../../../l10n/Provider/localization_provider.dart';
 import '../../Theme/Provider/theme_provider.dart';
 import '../Main/components/language_drop_down.dart';
-enum Language { english,urdu }
+
+enum Language { english, urdu }
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -82,10 +84,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             builder: (context, languageChangeProvider, child) {
               return PopupMenuButton(
                 ///OnSelected Logics
-                onSelected: (Language item) {
+                onSelected: (Language item) async{
                   if (Language.english.name == item.name) {
+                    SharedPreferences sp = await SharedPreferences.getInstance();
+                    sp.setString('language_code', 'en');
+                    sp.setString('language_code', 'ur');
                     languageChangeProvider.changeLanguage(const Locale('en'));
-                  } else  {
+                  } else {
                     languageChangeProvider.changeLanguage(const Locale('ur'));
                   }
                 },
@@ -97,14 +102,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Text('english'),
                     ),
 
-
-
                     ///Pop Up for urdu
                     const PopupMenuItem(
                       value: Language.urdu,
                       child: Text('Urdu'),
                     ),
-
 
                     // PopupMenuItem
                   ];
