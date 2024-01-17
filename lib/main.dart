@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,13 +11,14 @@ import 'package:simple_flutter_project/Presentation/Screens/SplashScreen/Provide
 import 'package:simple_flutter_project/Presentation/Theme/Provider/theme_provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/Provider/user_provider.dart';
 import 'package:simple_flutter_project/Presentation/routes/app_route_configs.dart';
-import 'package:simple_flutter_project/l10n/support_languages.dart';
+import 'firebase_options.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized(); // Ensure widgets are initialized
   // LocaleProvider localeProvider = LocaleProvider();
   // await localeProvider.loadLocale();
   WidgetsFlutterBinding.ensureInitialized();
+
   SharedPreferences sp = await SharedPreferences.getInstance();
   final String languageCode = sp.getString('language_code') ?? "";
   print("********** $languageCode *************");
