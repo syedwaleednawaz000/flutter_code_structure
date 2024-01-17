@@ -19,17 +19,19 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences sp = await SharedPreferences.getInstance();
   final String languageCode = sp.getString('language_code') ?? "";
+  print("********** $languageCode *************");
 
   runApp(
-     MyApp(
-       locale: languageCode,
-     ),
+    MyApp(
+      locale: languageCode,
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  final String ?locale;
-   MyApp({super.key,this.locale});
+  final String? locale;
+
+  MyApp({super.key, this.locale});
 
   @override
   Widget build(BuildContext context) {
@@ -44,41 +46,43 @@ class MyApp extends StatelessWidget {
       child: Builder(builder: (BuildContext context) {
         // final themeChangeProvider = Provider.of<ThemeNotifier>(context);
         final languageProvider = Provider.of<LanguageChangeProvider>(context);
-        return Consumer<ThemeNotifier>(builder: (context, value, child) {
-          return ScreenUtilInit(
-            designSize: const Size(393, 852),
-            minTextAdapt: true,
-            splitScreenMode: true,
-            builder: (context, child) {
-              final themeProvider = Provider.of<ThemeNotifier>(context);
-              return MaterialApp.router(
-                debugShowCheckedModeBanner: false,
-                title: 'Flutter code structure',
-                theme: themeProvider.getTheme(),
-                locale: locale == ''
-                    ? const Locale('en')
-                    : languageProvider.locale ?? const Locale('en'),
-                ///localization aspects
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: const [
-                Locale('en'),
-                Locale('ur'),
+        return Consumer<ThemeNotifier>(
+          builder: (context, value, child) {
+            return ScreenUtilInit(
+              designSize: const Size(393, 852),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (context, child) {
+                final themeProvider = Provider.of<ThemeNotifier>(context);
+                return MaterialApp.router(
+                  debugShowCheckedModeBanner: false,
+                  title: 'Flutter code structure',
+                  theme: themeProvider.getTheme(),
+                  locale: locale == ''
+                      ? const Locale('en')
+                      : Locale("$locale") ?? const Locale('en'),
 
-              ],
-                routerConfig: MyAppRouter().router,
+                  ///localization aspects
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: const [
+                    Locale('en'),
+                    Locale('ur'),
+                  ],
+                  routerConfig: MyAppRouter().router,
 
-                // routerConfigs:
-              );
-              // child: const SplashScreen()
-            },
-            // child: CounterScreen(),
-          );
-        },);
+                  // routerConfigs:
+                );
+                // child: const SplashScreen()
+              },
+              // child: CounterScreen(),
+            );
+          },
+        );
       }),
     );
   }

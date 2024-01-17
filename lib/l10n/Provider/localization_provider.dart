@@ -104,8 +104,10 @@ class LanguageChangeProvider extends ChangeNotifier {
     _appLocale = type;
     if (_appLocale == const Locale('en')) {
       await sp.setString('language_code', 'en');
+      notifyListeners();
     } else  {
       await sp.setString('language_code', 'ur');
+      notifyListeners();
     }
 
     notifyListeners();

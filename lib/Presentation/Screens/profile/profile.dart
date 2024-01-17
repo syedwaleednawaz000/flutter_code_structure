@@ -36,7 +36,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   //     print('Switch Button is OFF');
   //   }
   // }
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<LanguageChangeProvider>(context,listen: false);
+  }
   bool isDarkMode = false;
 
   @override
@@ -85,10 +90,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return PopupMenuButton(
                 ///OnSelected Logics
                 onSelected: (Language item) async{
+                  setState(() {
+
+                  });
                   if (Language.english.name == item.name) {
-                    SharedPreferences sp = await SharedPreferences.getInstance();
-                    sp.setString('language_code', 'en');
-                    sp.setString('language_code', 'ur');
                     languageChangeProvider.changeLanguage(const Locale('en'));
                   } else {
                     languageChangeProvider.changeLanguage(const Locale('ur'));
