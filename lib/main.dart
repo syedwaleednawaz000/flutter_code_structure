@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/Provider/counter_provider.dart';
 import 'package:simple_flutter_project/l10n/Provider/localization_provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/SplashScreen/Provider/splash_provider.dart';
@@ -12,18 +13,23 @@ import 'package:simple_flutter_project/Presentation/routes/app_route_configs.dar
 import 'package:simple_flutter_project/l10n/support_languages.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensure widgets are initialized
-  LocaleProvider localeProvider = LocaleProvider();
-  await localeProvider.loadLocale();
-
+  // WidgetsFlutterBinding.ensureInitialized(); // Ensure widgets are initialized
+  // LocaleProvider localeProvider = LocaleProvider();
+  // await localeProvider.loadLocale();
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences sp = await SharedPreferences.getInstance();
+  final String languageCode = sp.getString('language_code') ?? "";
 
   runApp(
-    const MyApp(),
+     MyApp(
+       locale: languageCode,
+     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String ?locale;
+   MyApp({super.key,this.locale});
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +38,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CounterProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-        ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageChangeProvider()),
         ChangeNotifierProvider(create: (_) => SplashProvider()),
       ],
       child: Builder(builder: (BuildContext context) {
         // final themeChangeProvider = Provider.of<ThemeNotifier>(context);
-        final localeProvider = Provider.of<LocaleProvider>(context);
+        final languageProvider = Provider.of<LanguageChangeProvider>(context);
         return Consumer<ThemeNotifier>(builder: (context, value, child) {
           return ScreenUtilInit(
             designSize: const Size(393, 852),
@@ -49,7 +55,9 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter code structure',
                 theme: themeProvider.getTheme(),
-                locale: localeProvider.locale,
+                locale: locale == ''
+                    ? const Locale('en')
+                    : languageProvider.locale ?? const Locale('en'),
                 ///localization aspects
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
@@ -57,7 +65,11 @@ class MyApp extends StatelessWidget {
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                supportedLocales: SupportLanguages.languages,
+                supportedLocales: const [
+                Locale('en'),
+                Locale('ur'),
+
+              ],
                 routerConfig: MyAppRouter().router,
 
                 // routerConfigs:

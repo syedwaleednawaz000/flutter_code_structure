@@ -83,42 +83,76 @@
 // }
 
 
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:flutter/widgets.dart';
+class LanguageChangeProvider extends ChangeNotifier {
+  Locale? _appLocale;
 
-import '../../Utils/localizationPrefs.dart';
+  Locale? get locale => _appLocale;
 
-import '../support_languages.dart';
+  TextDirection textDire = TextDirection.ltr;
 
-class LocaleProvider with ChangeNotifier {
-  /// this is the shared prefs class where i set and get data
-  LocalizationPrefs localePrefs = LocalizationPrefs();
-  Locale? _locale;
-
-  LocaleProvider() {
-    // Load theme status when ThemeProvider is created
-    loadLocale();
-  }
-
-  Locale? get locale => _locale;
-
-  void setLocale(Locale locale) {
-    ///we don't accept other locales(languages without defined in all )
-    if (!SupportLanguages.languages.contains(locale)) return;
-
-    _locale = locale;
-    localePrefs.setLanguage(locale);
+  void textDirectionControl() {
+    textDire =
+    (textDire == TextDirection.ltr) ? TextDirection.rtl : TextDirection.ltr;
     notifyListeners();
   }
 
-  void clearLocale() {
-    _locale = null;
+  void changeLanguage(Locale type) async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    _appLocale = type;
+    if (_appLocale == const Locale('en')) {
+      await sp.setString('language_code', 'en');
+    } else  {
+      await sp.setString('language_code', 'ur');
+    }
+
     notifyListeners();
   }
 
-  Future<void> loadLocale() async {
-    String savedLanguage = await localePrefs.getLanguage();
-    _locale = Locale(savedLanguage);
-    notifyListeners();
-  }
+
+
+
 }
+
+
+
+// import 'package:flutter/widgets.dart';
+//
+// import '../../Utils/localizationPrefs.dart';
+//
+// import '../support_languages.dart';
+//
+// class LocaleProvider with ChangeNotifier {
+//   /// this is the shared prefs class where i set and get data
+//   LocalizationPrefs localePrefs = LocalizationPrefs();
+//   Locale? _locale;
+//
+//   LocaleProvider() {
+//     // Load theme status when ThemeProvider is created
+//     loadLocale();
+//   }
+//
+//   Locale? get locale => _locale;
+//
+//   void setLocale(Locale locale) {
+//     ///we don't accept other locales(languages without defined in all )
+//     if (!SupportLanguages.languages.contains(locale)) return;
+//
+//     _locale = locale;
+//     localePrefs.setLanguage(locale);
+//     notifyListeners();
+//   }
+//
+//   void clearLocale() {
+//     _locale = null;
+//     notifyListeners();
+//   }
+//
+//   Future<void> loadLocale() async {
+//     String savedLanguage = await localePrefs.getLanguage();
+//     _locale = Locale(savedLanguage);
+//     notifyListeners();
+//   }
+// }

@@ -3,9 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../config/app_constant.dart';
+import '../../../l10n/Provider/localization_provider.dart';
 import '../../Theme/Provider/theme_provider.dart';
 import '../Main/components/language_drop_down.dart';
-
+enum Language { english,urdu }
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -77,7 +78,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
-          // const LanguageDropDown(),
+          Consumer<LanguageChangeProvider>(
+            builder: (context, languageChangeProvider, child) {
+              return PopupMenuButton(
+                ///OnSelected Logics
+                onSelected: (Language item) {
+                  if (Language.english.name == item.name) {
+                    languageChangeProvider.changeLanguage(const Locale('en'));
+                  } else  {
+                    languageChangeProvider.changeLanguage(const Locale('ur'));
+                  }
+                },
+                itemBuilder: (context) {
+                  return <PopupMenuEntry<Language>>[
+                    ///Pop Up for English
+                    const PopupMenuItem(
+                      value: Language.english,
+                      child: Text('english'),
+                    ),
+
+
+
+                    ///Pop Up for urdu
+                    const PopupMenuItem(
+                      value: Language.urdu,
+                      child: Text('Urdu'),
+                    ),
+
+
+                    // PopupMenuItem
+                  ];
+                },
+              );
+            },
+          ),
           Consumer<ThemeNotifier>(builder: (context, provider, child) {
             return Switch(
               onChanged: (bool value) async {

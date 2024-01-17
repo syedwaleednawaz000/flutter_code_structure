@@ -6,6 +6,7 @@ import 'package:simple_flutter_project/Presentation/Screens/Main/components/cust
 import 'package:simple_flutter_project/Presentation/Screens/Nav_bar_drawer/Component/custom_bottom_nav_bar.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
 import 'package:simple_flutter_project/Presentation/Screens/profile/profile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavigationDrawerMainScreen extends StatefulWidget {
   const NavigationDrawerMainScreen({super.key});
@@ -34,7 +35,7 @@ class _NavigationDrawerMainScreenState
 
       /// this is abid custom app bar
       appBar: customAppBar(
-        appBarText: 'This is Counter Screen',
+        appBarText: AppLocalizations.of(context)!.consumerText,
         leadingIcon: Icons.menu,
         onPressed: () {
           _scaffoldKey.currentState!.openDrawer();
