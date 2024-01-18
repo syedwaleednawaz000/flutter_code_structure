@@ -6,19 +6,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/Provider/counter_provider.dart';
+import 'package:simple_flutter_project/Presentation/Screens/api/firebase_api.dart';
+import 'package:simple_flutter_project/Presentation/Screens/notification_screen/notification_screen.dart';
 import 'package:simple_flutter_project/l10n/Provider/localization_provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/SplashScreen/Provider/splash_provider.dart';
 import 'package:simple_flutter_project/Presentation/Theme/Provider/theme_provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/Provider/user_provider.dart';
 import 'package:simple_flutter_project/Presentation/routes/app_route_configs.dart';
+import 'Presentation/Screens/Nav_bar_drawer/View/navigation_drawer_main_screen.dart';
 import 'firebase_options.dart';
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized(); // Ensure widgets are initialized
   // LocaleProvider localeProvider = LocaleProvider();
   // await localeProvider.loadLocale();
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  await FireBaseApi().initNotification();
   SharedPreferences sp = await SharedPreferences.getInstance();
   final String languageCode = sp.getString('language_code') ?? "";
   print("********** $languageCode *************");
@@ -56,26 +62,27 @@ class MyApp extends StatelessWidget {
               splitScreenMode: true,
               builder: (context, child) {
                 final themeProvider = Provider.of<ThemeNotifier>(context);
-                return MaterialApp.router(
+                return MaterialApp(
+                  navigatorKey: navigatorKey,
                   debugShowCheckedModeBanner: false,
                   title: 'Flutter code structure',
                   theme: themeProvider.getTheme(),
-                  locale: locale == ''
-                      ? const Locale('en')
-                      : Locale("$locale") ?? const Locale('en'),
-
-                  ///localization aspects
+                  locale: languageProvider.appLocale,
                   localizationsDelegates: const [
                     AppLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
+                  // routes: {
+                  //   '/NotificationScreen':(context) => NotificationScreen(),
+                  // },
                   supportedLocales: const [
-                    Locale('en'),
+                    Locale('en'), // English
                     Locale('ur'),
                   ],
-                  routerConfig: MyAppRouter().router,
+                  home: const NavigationDrawerMainScreen(),
+                  // routerConfig: MyAppRouter().router,
 
                   // routerConfigs:
                 );

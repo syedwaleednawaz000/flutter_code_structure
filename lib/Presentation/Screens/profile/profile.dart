@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,6 +47,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List languageLists = [
+        "English",
+        "Urdu",
+    ];
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -85,39 +90,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
-          Consumer<LanguageChangeProvider>(
-            builder: (context, languageChangeProvider, child) {
-              return PopupMenuButton(
-                ///OnSelected Logics
-                onSelected: (Language item) async{
-                  setState(() {
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              physics: const BouncingScrollPhysics(),
+              itemCount: languageLists.length,
+              itemBuilder: (context, index) {
+                return Consumer<LanguageChangeProvider>(
+                    builder: (context, Provider, child){
+                      return GestureDetector(
+                        onTap: () {
+                          Provider.setCurrent(index);
+                          Provider.changeLanguage(
+                              Locale(TranslationList[index].languageName));
+                        },
+                        child: Container(
+                          // width: 326,
+                          height: 48.h,
+                          // color: AppColors.textColor,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16.w, vertical: 14.h),
+                          margin: EdgeInsets.only(bottom: 8.r),
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            color: Provider.current == index
+                                ? Colors.grey
+                                : Colors.blue,
+                            borderRadius: BorderRadius.circular(4),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x3F000000),
+                                blurRadius: 4,
+                                offset: Offset(0, 4),
+                                spreadRadius: 0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                );
 
-                  });
-                  if (Language.english.name == item.name) {
-                    languageChangeProvider.changeLanguage(const Locale('en'));
-                  } else {
-                    languageChangeProvider.changeLanguage(const Locale('ur'));
-                  }
-                },
-                itemBuilder: (context) {
-                  return <PopupMenuEntry<Language>>[
-                    ///Pop Up for English
-                    const PopupMenuItem(
-                      value: Language.english,
-                      child: Text('english'),
-                    ),
-
-                    ///Pop Up for urdu
-                    const PopupMenuItem(
-                      value: Language.urdu,
-                      child: Text('Urdu'),
-                    ),
-
-                    // PopupMenuItem
-                  ];
-                },
-              );
-            },
+              },
+            ),
           ),
           Consumer<ThemeNotifier>(builder: (context, provider, child) {
             return Switch(
@@ -140,3 +155,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+class TranslationModel {
+  final String languageName;
+  final String countryName;
+
+  TranslationModel({required this.languageName, required this.countryName});
+}
+
+List<TranslationModel> TranslationList = [
+  TranslationModel(languageName: "en", countryName: "US"),
+  TranslationModel(languageName: "ur", countryName: "PK"),
+];

@@ -7,5 +7,6 @@ class AppConstant{
   static String userID = "";
   static String montMedium = "Mont-Medium";
   static String getUserToken = '';
+  static String language = '';
   static String profileImageUrl = 'https://picsum.photos/250?image=9';
 }

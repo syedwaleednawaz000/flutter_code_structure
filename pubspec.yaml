@@ -52,6 +52,7 @@ dependencies:
   cloud_firestore: ^4.14.0
   flutter_localizations:
     sdk: flutter
+  firebase_messaging: ^14.7.10
 
 dev_dependencies:
   flutter_test:
