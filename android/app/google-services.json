@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "943295536995",
+    "firebase_url": "https://push-notification-f7d33-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "push-notification-f7d33",
+    "storage_bucket": "push-notification-f7d33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943295536995:android:e05ba6c3bde951ec2abd56",
+        "android_client_info": {
+          "package_name": "com.example.simple_flutter_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgK0qrDZwgPLAjIWJRoPM7Vt8-7-K-QNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

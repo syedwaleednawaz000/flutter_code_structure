@@ -7,7 +7,6 @@ import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_da
 import 'package:simple_flutter_project/Presentation/Screens/Nav_bar_drawer/View/navigation_drawer_main_screen.dart';
 import 'package:simple_flutter_project/config/app_router_constants.dart';
 
-import '../Screens/Main/View/selectview.dart';
 
 class MyAppRouter {
   GoRouter router = GoRouter(

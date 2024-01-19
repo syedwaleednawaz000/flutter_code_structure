@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,7 +11,7 @@ import '../Main/components/language_drop_down.dart';
 enum Language { english, urdu }
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -36,16 +37,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
   //     print('Switch Button is OFF');
   //   }
   // }
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<LanguageChangeProvider>(context,listen: false);
+    Provider.of<LanguageChangeProvider>(context, listen: false);
   }
+
   bool isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
+    List languageLists = [
+      "English",
+      "Urdu",
+    ];
+    List languageText = [
+      "English",
+      "Urdu",
+    ];
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -86,36 +96,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           Consumer<LanguageChangeProvider>(
-            builder: (context, languageChangeProvider, child) {
-              return PopupMenuButton(
-                ///OnSelected Logics
-                onSelected: (Language item) async{
-                  setState(() {
-
-                  });
-                  if (Language.english.name == item.name) {
-                    languageChangeProvider.changeLanguage(const Locale('en'));
-                  } else {
-                    languageChangeProvider.changeLanguage(const Locale('ur'));
-                  }
-                },
-                itemBuilder: (context) {
-                  return <PopupMenuEntry<Language>>[
-                    ///Pop Up for English
-                    const PopupMenuItem(
-                      value: Language.english,
-                      child: Text('english'),
+            builder: (context, provider, child) {
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.h),
+                child: Container(
+                  height: 48.h,
+                  decoration: BoxDecoration(
+                    color: provider.current ==
+                            languageText.indexOf(languageText[provider.current])
+                        ? Colors.grey
+                        : Colors.blue,
+                    borderRadius: BorderRadius.circular(4),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x3F000000),
+                        blurRadius: 4,
+                        offset: Offset(0, 4),
+                        spreadRadius: 0,
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: DropdownButton<String>(
+                      underline: const SizedBox(),
+                      value: languageText[provider.current].toString(),
+                      onChanged: (String? selectedLanguage) {
+                        int index = languageText.indexOf(selectedLanguage!);
+                        provider.setCurrent(index);
+                        provider.changeLanguage(
+                          Locale(TranslationList[index].languageName),
+                        );
+                        // _saveLanguageToPrefs(TranslationList[index].languageName);
+                      },
+                      items: languageText
+                          .map<DropdownMenuItem<String>>((language) {
+                        return DropdownMenuItem(
+                          value: language,
+                          child: SizedBox(
+                            height: 48.h,
+                            width: 100.w,
+                            child: Center(
+                              child: Text(
+                                language,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w900),
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
                     ),
-
-                    ///Pop Up for urdu
-                    const PopupMenuItem(
-                      value: Language.urdu,
-                      child: Text('Urdu'),
-                    ),
-
-                    // PopupMenuItem
-                  ];
-                },
+                  ),
+                ),
               );
             },
           ),
@@ -140,3 +175,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+
+class TranslationModel {
+  final String languageName;
+  final String countryName;
+
+  TranslationModel({required this.languageName, required this.countryName});
+}
+
+List<TranslationModel> TranslationList = [
+  TranslationModel(languageName: "en", countryName: "US"),
+  TranslationModel(languageName: "ur", countryName: "PK"),
+];
