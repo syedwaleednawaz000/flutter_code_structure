@@ -42,6 +42,7 @@ dependencies:
   shared_preferences: ^2.2.2
   http: ^0.13.6
   provider: ^6.0.4
+  logger: ^2.0.2+1
   dependency_validator: ^3.2.3
 #  flutter pub run dependency_validator
   dio: ^5.2.1+1

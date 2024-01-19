@@ -6,12 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../config/app_constant.dart';
 import '../../../l10n/Provider/localization_provider.dart';
 import '../../Theme/Provider/theme_provider.dart';
-import '../Main/components/language_drop_down.dart';
 
-enum Language { english, urdu }
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({super.key});
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -147,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
 
-          Consumer<ThemeNotifier>(builder: (context, provider, child) {
+          Consumer<ThemeProvider>(builder: (context, provider, child) {
             return Switch(
               onChanged: (bool value) async {
                 final prefs = await SharedPreferences.getInstance();

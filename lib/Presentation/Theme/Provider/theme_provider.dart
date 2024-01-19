@@ -2,56 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../config/app_constant.dart';
 
-class ThemeNotifier with ChangeNotifier {
+class ThemeProvider with ChangeNotifier {
   final darkTheme = ThemeData(
     // fontFamily: AppConstant.LightFont,
-      primaryColor: const Color(0xffE1E1E1),
-      cardColor: const Color(0xff000000),
-      // Feild, Card
-      backgroundColor: Color(0xff000000),
-      scaffoldBackgroundColor: const Color(0xffffffff),
-      // buttonColor: const Color(0xff434242),
-      textTheme: TextTheme(bodyText1: TextStyle(color: Color(0xffffffff))),
-      shadowColor: Colors.black,
-      // canvasColor: AppColors.primarybtn,
-      // Button Color
-      highlightColor: Colors.white,
-      // Icons BG Color
-      dialogBackgroundColor: Color(0xffD9D9D9),
-      toggleableActiveColor: const Color(0xffD9D9D9),
-      // accentColor: const Color(0xffD9D9D9),
-      indicatorColor: const Color(0xffD9D9D9),
-      dividerColor: Colors.white,
-      hintColor: Colors.white,
-      bottomAppBarColor: Colors.black);
+    primaryColor: const Color(0xffE1E1E1),
+    cardColor: const Color(0xff000000),
+    // backgroundColor: const Color(0xff000000),
+    scaffoldBackgroundColor: const Color(0xffffffff),
+    // textTheme: const TextTheme(bodyText1: TextStyle(color: Color(0xffffffff))),
+    shadowColor: Colors.black,
+    highlightColor: Colors.white,
+    dialogBackgroundColor: const Color(0xffD9D9D9),
+    // toggleableActiveColor: const Color(0xffD9D9D9),
+    indicatorColor: const Color(0xffD9D9D9),
+    dividerColor: Colors.white,
+    hintColor: Colors.white,
+    // bottomAppBarColor: Colors.black,
+  );
 
   final lightTheme = ThemeData(
     // fontFamily: AppConstant.LightFont,
-      primaryColor: const Color(0xff161A26),
-      cardColor: const Color(0xffF2F2F2),
-      //F2F2F2 Feild, Card
-      backgroundColor: Color(0xffffffff),
-      scaffoldBackgroundColor: const Color(0xff353535),
-      // buttonColor: Color(0xff434242),
-      textTheme: TextTheme(bodyText1: TextStyle(color: Color(0xfffffff))),
-      shadowColor: Colors.white,
-      canvasColor: Colors.white,
-      // Button Color, Drawar Icons Color
-      // highlightColor: AppColors.primarybtn,
-      // Icons BG Color
-      dialogBackgroundColor: Color(0x54888888),
-      toggleableActiveColor: const Color(0xff283349),
-      hintColor: Colors.white,
-      // accentColor: const Color(0xff283349),
-      indicatorColor: const Color(0xff283349),
-      dividerColor: Colors.white,
-      bottomAppBarColor: Color(0xffffffff));
+    primaryColor: const Color(0xff161A26),
+    cardColor: const Color(0xffF2F2F2),
+    // backgroundColor: const Color(0xffffffff),
+    scaffoldBackgroundColor: const Color(0xff353535),
+    // textTheme: const TextTheme(bodyText1: TextStyle(color: Color(0xffffffff))),
+    shadowColor: Colors.white,
+    canvasColor: Colors.white,
+    dialogBackgroundColor: const Color(0x54888888),
+    // toggleableActiveColor: const Color(0xff283349),
+    hintColor: Colors.white,
+    indicatorColor: const Color(0xff283349),
+    dividerColor: Colors.white,
+    // bottomAppBarColor: const Color(0xffffffff),
+  );
 
   ThemeData? _themeData;
 
   ThemeData? getTheme() => _themeData;
-  //Todo my code
-  ThemeNotifier() {
+
+  // Todo my code
+  ThemeProvider() {
     getStoreValue().then((themeBoolValue) {
       var themeMode = themeBoolValue ?? true; // Change the default to true (dark theme)
       if (themeMode == false) {
@@ -79,6 +70,7 @@ class ThemeNotifier with ChangeNotifier {
     notifyListeners();
     return themeBoolValue;
   }
+
   void setTheme({required bool themeValue}) async {
     _setTheme = themeValue;
     AppConstant.themValue = themeValue;
@@ -91,7 +83,6 @@ class ThemeNotifier with ChangeNotifier {
       StorageManager.saveData('themeMode', themeValue);
     }
   }
-
 }
 
 class StorageManager {

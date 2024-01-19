@@ -9,21 +9,10 @@ class TranslationModel {
 }
 
 class LanguageChangeProvider extends ChangeNotifier {
-  List<TranslationModel> translationList = [
-    TranslationModel(languageName: "en", countryName: "US"),
-    TranslationModel(languageName: "ur", countryName: "PK"),
-  ];
-
   Locale? _appLocale;
   Locale? get locale => _appLocale;
 
   TextDirection textDire = TextDirection.ltr;
-
-  void textDirectionControl() {
-    textDire =
-    (textDire == TextDirection.ltr) ? TextDirection.rtl : TextDirection.ltr;
-    notifyListeners();
-  }
 
   Locale? _locale;
   String _selectedLanguage = ''; // Added variable for selected language name
@@ -33,10 +22,17 @@ class LanguageChangeProvider extends ChangeNotifier {
   int _current = 0;
   int get current => _current;
 
-  Future<void> _loadSelectedLanguage() async {
-    final preferences = await SharedPreferences.getInstance();
-    _selectedLanguage = preferences.getString('selectedLanguage') ?? 'en';
+
+  Future<void> textDirectionControl() async{
+    textDire =
+    (textDire == TextDirection.ltr) ? TextDirection.rtl : TextDirection.ltr;
+    notifyListeners();
   }
+
+  List<TranslationModel> translationList = [
+    TranslationModel(languageName: "en", countryName: "US"),
+    TranslationModel(languageName: "ur", countryName: "PK"),
+  ];
 
   Future<void> setCurrent(int index) async {
     _current = index;
@@ -50,9 +46,14 @@ class LanguageChangeProvider extends ChangeNotifier {
     preferences.setString('selectedLanguage', _selectedLanguage);
   }
 
-  LanguageChangeProvider() {
+  Future<void> loadLocalLanguageCode() async{
     _loadLocale();
-    _loadSelectedLanguage(); // Load selected language during initialization
+    _loadSelectedLanguage();
+  }
+
+  Future<void> _loadSelectedLanguage() async {
+    final preferences = await SharedPreferences.getInstance();
+    _selectedLanguage = preferences.getString('selectedLanguage') ?? 'en';
   }
 
   Future<void> _loadLocale() async {

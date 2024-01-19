@@ -34,5 +34,4 @@ Future initPushNotification() async{
   ///attach event listeners for when a notifications opens the app
   FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
 }
-
 }
