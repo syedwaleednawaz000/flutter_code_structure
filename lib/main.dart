@@ -25,7 +25,7 @@ void main() async {
   await FireBaseApi().initNotification();
 
   SharedPreferences sp = await SharedPreferences.getInstance();
-  final String languageCode = sp.getString('languageCode') ?? "";
+  final String languageCode = sp.getString('language_Code') ?? "";
   print("********** $languageCode *************");
 
   runApp(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/View/selectview.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:simple_flutter_project/l10n/support_languages.dart';
 class CustomBottomNavBar extends StatefulWidget {
   int currentIndex;
   final Function(int) onTap;
@@ -17,7 +19,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     return BottomNavigationBar(
       currentIndex: widget.currentIndex,
       onTap: widget.onTap,
-      unselectedItemColor: Colors.black,
+      unselectedItemColor: Colors.grey,
       unselectedLabelStyle: const TextStyle(
         fontSize: 14,
         color: Colors.black
@@ -27,23 +29,23 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       showUnselectedLabels: true,
       selectedFontSize: 18,
       selectedItemColor: Colors.blue,
-      items: const [
+      items:  [
         BottomNavigationBarItem(
-          icon: Icon(Icons.countertops),
-          label: 'Counter',
+          icon: const Icon(Icons.countertops),
+          label: AppLocalizations.of(context)!.counterText,
         ),
 
         BottomNavigationBarItem(
-          icon: Icon(Icons.construction),
-          label: 'Consumer',
+          icon: const Icon(Icons.construction),
+          label: AppLocalizations.of(context)!.consumerText,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.select_all),
-          label: 'Selector',
+          label:  AppLocalizations.of(context)!.selectorText,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Profile',
+          label:  AppLocalizations.of(context)!.profile,
         ),
       ],
     );

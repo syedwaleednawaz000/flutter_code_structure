@@ -48,10 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List languageLists = [
-      "English",
-      "Urdu",
-    ];
+
     List languageText = [
       "English",
       "Urdu",
@@ -101,9 +98,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 20.h),
                 child: Container(
                   height: 48.h,
+                  width: 220.w,
                   decoration: BoxDecoration(
                     color: provider.current ==
-                            languageText.indexOf(languageText[provider.current])
+                        languageText.indexOf(languageText[provider.current])
                         ? Colors.grey
                         : Colors.blue,
                     borderRadius: BorderRadius.circular(4),
@@ -118,42 +116,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: DropdownButton<String>(
-                      underline: const SizedBox(),
-                      value: languageText[provider.current].toString(),
-                      onChanged: (String? selectedLanguage) {
-                        int index = languageText.indexOf(selectedLanguage!);
-                        provider.setCurrent(index);
-                        provider.changeLanguage(
-                          Locale(TranslationList[index].languageName),
-                        );
-                        // _saveLanguageToPrefs(TranslationList[index].languageName);
-                      },
-                      items: languageText
-                          .map<DropdownMenuItem<String>>((language) {
-                        return DropdownMenuItem(
-                          value: language,
-                          child: SizedBox(
-                            height: 48.h,
-                            width: 100.w,
-                            child: Center(
-                              child: Text(
-                                language,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w900),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(provider.selectedLanguage == 'ur' ? 'Urdu' : 'English' ),
+                        DropdownButton<String>(
+                          underline: const SizedBox(),
+                          // value: languageText[provider.current].toString(),
+                          onChanged: (String? selectedLanguage) async {
+                            int index = languageText.indexOf(selectedLanguage!);
+                            print("***** Selected Index $index");
+
+                            // Save the selected index to SharedPreferences
+                            SharedPreferences sp = await SharedPreferences.getInstance();
+                            sp.setInt('selectedLanguageIndex', index);
+
+                            provider.setCurrent(index);
+                            provider.changeLanguage(
+                              Locale(TranslationList[index].languageName),
+                            );
+                          },
+                          items: languageText.map<DropdownMenuItem<String>>((language) {
+                            return DropdownMenuItem(
+                              value: language,
+                              child: SizedBox(
+                                height: 48.h,
+                                width: 100.w,
+                                child: Center(
+                                  child: Text(
+                                    language,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w900),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                            );
+                          }).toList(),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               );
             },
           ),
+
           Consumer<ThemeNotifier>(builder: (context, provider, child) {
             return Switch(
               onChanged: (bool value) async {

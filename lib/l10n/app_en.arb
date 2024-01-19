@@ -2,5 +2,14 @@
    "counterText" : "Counter",
    "consumerText":"Consumer",
    "selectorText":"Selector",
-   "selectLanguage":"Select Language"
+   "selectLanguage":"Select Language",
+   "profile":"Profile",
+   "my_profile":"My Profile",
+   "my_course":"My Course",
+   "my_premium":"My Course",
+   "saved_videos":"Saved Videos",
+   "edit_profile":"Edit Profile",
+   "logout":"LogOut",
+      "abid_ullah_orakzai": "Abid Ullah Orakzai"
+
 }
