@@ -1,64 +1,20 @@
-// // LanguageChangeProvider.dart
-// import 'package:flutter/material.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-//
-// class LanguageChangeProvider extends ChangeNotifier {
-//   Locale? _appLocale;
-//
-//   Locale? get locale => _appLocale;
-//
-//   TextDirection textDire = TextDirection.ltr;
-//
-//   void textDirectionControl() {
-//     textDire =
-//         (textDire == TextDirection.ltr) ? TextDirection.rtl : TextDirection.ltr;
-//     notifyListeners();
-//   }
-//
-//   Locale? _locale;
-//   String languageChnage = '';
-//
-//   Locale? get appLocale => _locale;
-//   int _current = 0;
-//
-//   int get current => _current;
-//
-//   void setCurrent(int index) {
-//     _current = index;
-//     notifyListeners();
-//   }
-//
-//   LanguageChangeProvider() {
-//     _loadLocale();
-//   }
-//
-//   Future<void> _loadLocale() async {
-//     final preferences = await SharedPreferences.getInstance();
-//     final languageCode = preferences.getString('languageCode');
-//     if (languageCode != null) {
-//       _locale = Locale(languageCode);
-//     } else {
-//       _locale = const Locale('en');
-//     }
-//     notifyListeners();
-//   }
-//
-//   Future<void> changeLanguage(Locale locale) async {
-//     _locale = locale;
-//     notifyListeners();
-//     final preferences = await SharedPreferences.getInstance();
-//     await preferences.setString('languageCode', locale.languageCode);
-//   }
-// }
-// LanguageChangeProvider.dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../Presentation/Screens/profile/profile.dart';
+class TranslationModel {
+  final String languageName;
+  final String countryName;
+
+  TranslationModel({required this.languageName, required this.countryName});
+}
 
 class LanguageChangeProvider extends ChangeNotifier {
-  Locale? _appLocale;
+  List<TranslationModel> translationList = [
+    TranslationModel(languageName: "en", countryName: "US"),
+    TranslationModel(languageName: "ur", countryName: "PK"),
+  ];
 
+  Locale? _appLocale;
   Locale? get locale => _appLocale;
 
   TextDirection textDire = TextDirection.ltr;
@@ -73,10 +29,8 @@ class LanguageChangeProvider extends ChangeNotifier {
   String _selectedLanguage = ''; // Added variable for selected language name
 
   String get selectedLanguage => _selectedLanguage;
-
   Locale? get appLocale => _locale;
   int _current = 0;
-
   int get current => _current;
 
   Future<void> _loadSelectedLanguage() async {
@@ -84,9 +38,9 @@ class LanguageChangeProvider extends ChangeNotifier {
     _selectedLanguage = preferences.getString('selectedLanguage') ?? 'en';
   }
 
-  void setCurrent(int index) {
+  Future<void> setCurrent(int index) async {
     _current = index;
-    _selectedLanguage = TranslationList[index].languageName; // Set selected language name
+    _selectedLanguage = translationList[index].languageName; // Set selected language name
     _saveSelectedLanguage(); // Save selected language to SharedPreferences
     notifyListeners();
   }
@@ -114,8 +68,8 @@ class LanguageChangeProvider extends ChangeNotifier {
 
   Future<void> changeLanguage(Locale locale) async {
     _locale = locale;
-    notifyListeners();
     final preferences = await SharedPreferences.getInstance();
     await preferences.setString('languageCode', locale.languageCode);
+    notifyListeners();
   }
 }

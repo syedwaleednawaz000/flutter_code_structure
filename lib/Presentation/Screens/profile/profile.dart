@@ -22,21 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   var textValue = 'Switch is OFF';
 
-  // void toggleSwitch(bool value) {
-  //   if (isSwitched == false) {
-  //     setState(() {
-  //       isSwitched = true;
-  //       textValue = 'Switch Button is ON';
-  //     });
-  //     print('Switch Button is ON');
-  //   } else {
-  //     setState(() {
-  //       isSwitched = false;
-  //       textValue = 'Switch Button is OFF';
-  //     });
-  //     print('Switch Button is OFF');
-  //   }
-  // }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -121,41 +107,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(provider.selectedLanguage == 'ur' ? 'Urdu' : 'English' ),
-                        DropdownButton<String>(
-                          underline: const SizedBox(),
-                          // value: languageText[provider.current].toString(),
-                          onChanged: (String? selectedLanguage) async {
-                            int index = languageText.indexOf(selectedLanguage!);
-                            print("***** Selected Index $index");
-
-                            // Save the selected index to SharedPreferences
-                            SharedPreferences sp = await SharedPreferences.getInstance();
-                            sp.setInt('selectedLanguageIndex', index);
-
-                            provider.setCurrent(index);
-                            provider.changeLanguage(
-                              Locale(TranslationList[index].languageName),
-                            );
-                          },
-                          items: languageText.map<DropdownMenuItem<String>>((language) {
-                            return DropdownMenuItem(
-                              value: language,
-                              child: SizedBox(
-                                height: 48.h,
-                                width: 100.w,
-                                child: Center(
-                                  child: Text(
-                                    language,
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w900),
+                        Consumer<LanguageChangeProvider>(builder: (context, languageChangeProvider, child) {
+                          return                         DropdownButton<String>(
+                            underline: const SizedBox(),
+                            onChanged: (String? selectedLanguage) async {
+                              int index = languageText.indexOf(selectedLanguage!);
+                              SharedPreferences sp = await SharedPreferences.getInstance();
+                              sp.setInt('selectedLanguageIndex', index);
+                              provider.setCurrent(index);
+                              provider.changeLanguage(
+                                Locale(languageChangeProvider.translationList[index].languageName),
+                              );
+                            },
+                            items: languageText.map<DropdownMenuItem<String>>((language) {
+                              return DropdownMenuItem(
+                                value: language,
+                                child: SizedBox(
+                                  height: 48.h,
+                                  width: 100.w,
+                                  child: Center(
+                                    child: Text(
+                                      language,
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w900),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                              );
+                            }).toList(),
+                          );
+                        },)
                       ],
                     ),
                   ),
@@ -186,14 +169,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-class TranslationModel {
-  final String languageName;
-  final String countryName;
 
-  TranslationModel({required this.languageName, required this.countryName});
-}
 
-List<TranslationModel> TranslationList = [
-  TranslationModel(languageName: "en", countryName: "US"),
-  TranslationModel(languageName: "ur", countryName: "PK"),
-];
+

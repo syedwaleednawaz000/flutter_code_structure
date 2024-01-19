@@ -23,10 +23,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
   await FireBaseApi().initNotification();
-
-  SharedPreferences sp = await SharedPreferences.getInstance();
-  final String languageCode = sp.getString('language_Code') ?? "";
-  print("********** $languageCode *************");
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  final String languageCode = sharedPreferences.getString('language_Code') ?? "";
 
   runApp(
     MyApp(
