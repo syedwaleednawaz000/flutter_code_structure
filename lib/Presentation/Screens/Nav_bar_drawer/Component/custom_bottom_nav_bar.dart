@@ -17,6 +17,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     return BottomNavigationBar(
       currentIndex: widget.currentIndex,
       onTap: widget.onTap,
+      unselectedItemColor: Colors.black,
+      unselectedLabelStyle: const TextStyle(
+        fontSize: 14,
+        color: Colors.black
+      ),
       backgroundColor: Colors.white,
       showSelectedLabels: true,
       showUnselectedLabels: true,

@@ -95,56 +95,64 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              physics: const BouncingScrollPhysics(),
-              itemCount: languageLists.length,
-              itemBuilder: (context, index) {
-                return Consumer<LanguageChangeProvider>(
-                    builder: (context, provider, child) {
-                  return GestureDetector(
-                    onTap: () {
-                      provider.setCurrent(index);
-                      provider.changeLanguage(
-                          Locale(TranslationList[index].languageName));
-                    },
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 20.h),
-                      child: Container(
-                        // width: 326,
-                        height: 48.h,
-                        // color: AppColors.textColor,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 16.w, vertical: 14.h),
-                        margin: EdgeInsets.only(bottom: 8.r),
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          color: provider.current == index
-                              ? Colors.grey
-                              : Colors.blue,
-                          borderRadius: BorderRadius.circular(4),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x3F000000),
-                              blurRadius: 4,
-                              offset: Offset(0, 4),
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Center(
-                          child: Text(
-                            languageText[index].toString(),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
+          Consumer<LanguageChangeProvider>(
+            builder: (context, provider, child) {
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.h),
+                child: Container(
+                  height: 48.h,
+                  decoration: BoxDecoration(
+                    color: provider.current ==
+                            languageText.indexOf(languageText[provider.current])
+                        ? Colors.grey
+                        : Colors.blue,
+                    borderRadius: BorderRadius.circular(4),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x3F000000),
+                        blurRadius: 4,
+                        offset: Offset(0, 4),
+                        spreadRadius: 0,
                       ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: DropdownButton<String>(
+                      underline: const SizedBox(),
+                      value: languageText[provider.current].toString(),
+                      onChanged: (String? selectedLanguage) {
+                        int index = languageText.indexOf(selectedLanguage!);
+                        provider.setCurrent(index);
+                        provider.changeLanguage(
+                          Locale(TranslationList[index].languageName),
+                        );
+                        // _saveLanguageToPrefs(TranslationList[index].languageName);
+                      },
+                      items: languageText
+                          .map<DropdownMenuItem<String>>((language) {
+                        return DropdownMenuItem(
+                          value: language,
+                          child: SizedBox(
+                            height: 48.h,
+                            width: 100.w,
+                            child: Center(
+                              child: Text(
+                                language,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w900),
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
                     ),
-                  );
-                });
-              },
-            ),
+                  ),
+                ),
+              );
+            },
           ),
           Consumer<ThemeNotifier>(builder: (context, provider, child) {
             return Switch(
