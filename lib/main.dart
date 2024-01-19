@@ -1,3 +1,4 @@
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,14 +20,12 @@ import 'firebase_options.dart';
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized(); // Ensure widgets are initialized
-  // LocaleProvider localeProvider = LocaleProvider();
-  // await localeProvider.loadLocale();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
   await FireBaseApi().initNotification();
+
   SharedPreferences sp = await SharedPreferences.getInstance();
-  final String languageCode = sp.getString('language_code') ?? "";
+  final String languageCode = sp.getString('languageCode') ?? "";
   print("********** $languageCode *************");
 
   runApp(
@@ -52,7 +51,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SplashProvider()),
       ],
       child: Builder(builder: (BuildContext context) {
-        // final themeChangeProvider = Provider.of<ThemeNotifier>(context);
         final languageProvider = Provider.of<LanguageChangeProvider>(context);
         return Consumer<ThemeNotifier>(
           builder: (context, value, child) {
@@ -74,21 +72,13 @@ class MyApp extends StatelessWidget {
                     GlobalWidgetsLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
-                  // routes: {
-                  //   '/NotificationScreen':(context) => NotificationScreen(),
-                  // },
                   supportedLocales: const [
                     Locale('en'), // English
                     Locale('ur'),
                   ],
                   home: const NavigationDrawerMainScreen(),
-                  // routerConfig: MyAppRouter().router,
-
-                  // routerConfigs:
                 );
-                // child: const SplashScreen()
               },
-              // child: CounterScreen(),
             );
           },
         );
@@ -96,3 +86,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+

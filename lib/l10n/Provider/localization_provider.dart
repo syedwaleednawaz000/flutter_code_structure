@@ -1,3 +1,4 @@
+// LanguageChangeProvider.dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,18 +15,6 @@ class LanguageChangeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void changeLanguage(Locale type) async {
-  //   SharedPreferences sp = await SharedPreferences.getInstance();
-  //   _appLocale = type;
-  //
-  //   if (_appLocale == const Locale('ur')) {
-  //     await sp.setString('language_code', 'ur');
-  //   } else {
-  //     await sp.setString('language_code', 'en');
-  //   }
-  //
-  //   notifyListeners();
-  // }
   Locale? _locale;
 
   Locale? get appLocale => _locale;
@@ -38,7 +27,7 @@ class LanguageChangeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  LanguageChangeController() {
+  LanguageChangeProvider() {
     _loadLocale();
   }
 

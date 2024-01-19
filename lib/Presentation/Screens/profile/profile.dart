@@ -11,7 +11,7 @@ import '../Main/components/language_drop_down.dart';
 enum Language { english, urdu }
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -37,19 +37,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   //     print('Switch Button is OFF');
   //   }
   // }
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<LanguageChangeProvider>(context,listen: false);
+    Provider.of<LanguageChangeProvider>(context, listen: false);
   }
+
   bool isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
     List languageLists = [
-        "English",
-        "Urdu",
+      "English",
+      "Urdu",
+    ];
+    List languageText = [
+      "English",
+      "Urdu",
     ];
     return Scaffold(
       body: Column(
@@ -97,40 +102,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
               itemCount: languageLists.length,
               itemBuilder: (context, index) {
                 return Consumer<LanguageChangeProvider>(
-                    builder: (context, Provider, child){
-                      return GestureDetector(
-                        onTap: () {
-                          Provider.setCurrent(index);
-                          Provider.changeLanguage(
-                              Locale(TranslationList[index].languageName));
-                        },
-                        child: Container(
-                          // width: 326,
-                          height: 48.h,
-                          // color: AppColors.textColor,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16.w, vertical: 14.h),
-                          margin: EdgeInsets.only(bottom: 8.r),
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            color: Provider.current == index
-                                ? Colors.grey
-                                : Colors.blue,
-                            borderRadius: BorderRadius.circular(4),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color(0x3F000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                                spreadRadius: 0,
-                              ),
-                            ],
+                    builder: (context, provider, child) {
+                  return GestureDetector(
+                    onTap: () {
+                      provider.setCurrent(index);
+                      provider.changeLanguage(
+                          Locale(TranslationList[index].languageName));
+                    },
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: 20.h),
+                      child: Container(
+                        // width: 326,
+                        height: 48.h,
+                        // color: AppColors.textColor,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 16.w, vertical: 14.h),
+                        margin: EdgeInsets.only(bottom: 8.r),
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          color: provider.current == index
+                              ? Colors.grey
+                              : Colors.blue,
+                          borderRadius: BorderRadius.circular(4),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0x3F000000),
+                              blurRadius: 4,
+                              offset: Offset(0, 4),
+                              spreadRadius: 0,
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(
+                            languageText[index].toString(),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
-                      );
-                    }
-                );
-
+                      ),
+                    ),
+                  );
+                });
               },
             ),
           ),
@@ -155,6 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+
 class TranslationModel {
   final String languageName;
   final String countryName;

@@ -25,7 +25,7 @@ class _NavigationDrawerMainScreenState
     const CounterScreen(),
     const HomeAPIConsumer(),
     const HomeAPISelector(),
-    const ProfileScreen()
+     ProfileScreen()
   ];
 
   @override
