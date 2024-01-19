@@ -4,6 +4,7 @@ import 'package:simple_flutter_project/Presentation/Theme/Provider/theme_provide
 
 class AppConstant{
   static bool themValue = false;
+  static int selectedIndexLanguage = 0;
   static String userID = "";
   static String montMedium = "Mont-Medium";
   static String getUserToken = '';
