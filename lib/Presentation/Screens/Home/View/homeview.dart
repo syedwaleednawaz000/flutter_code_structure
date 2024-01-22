@@ -47,6 +47,7 @@ class CounterScreen extends StatelessWidget {
               MyButton(
                 title: "login",
                 onTap: () {
+                  // context.go(Uri(path: '/users/123', queryParameters: {'filter': 'abc'}).toString());
                  context.go("/consumer");
                 },
               )
