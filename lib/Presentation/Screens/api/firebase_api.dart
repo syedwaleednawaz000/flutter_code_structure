@@ -24,7 +24,7 @@ void handleMessage(RemoteMessage ? message){
 
 
   ///navigate to new screen when message is received and user taps notifications
-  navigatorKey.currentState?.pushNamed('/NotificationScreen',arguments: message);
+  // navigatorKey.currentState?.pushNamed('/NotificationScreen',arguments: message);
 }
   ///function to initialized foreground and background settings
 Future initPushNotification() async{
