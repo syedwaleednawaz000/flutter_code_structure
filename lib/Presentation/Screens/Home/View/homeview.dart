@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/Provider/counter_provider.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
 import 'package:simple_flutter_project/Presentation/Widget/my_button.dart';
-import 'package:simple_flutter_project/config/app_constant.dart';
 import 'package:simple_flutter_project/config/app_images.dart';
+import 'package:simple_flutter_project/config/app_router_constants.dart';
+import '../../Main/components/custom_app_bar.dart';
 import '../HomeComponent/float_button.dart';
 
 class CounterScreen extends StatelessWidget {
-  const CounterScreen({Key? key}) : super(key: key);
-
+  String? screenName;
+   CounterScreen({required this.screenName,Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     // final Color color = AppConstant(context).getColor;
     return SafeArea(
       child: Scaffold(
+        drawer: const CustomDrawer(),
+        key: _scaffoldKey,
+
+        /// this is abid custom app bar
+        appBar: customAppBar(
+          appBarText: screenName!,
+          leadingIcon: Icons.menu,
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+        ),
         floatingActionButton: Consumer<CounterProvider>(
             builder: (context, counterProvider, child) {
           return FloatButton(decrement: () {
@@ -47,8 +62,9 @@ class CounterScreen extends StatelessWidget {
               MyButton(
                 title: "login",
                 onTap: () {
+                  context.go(AppRouterConstants.profileScreen);
                   // context.go(Uri(path: '/users/123', queryParameters: {'filter': 'abc'}).toString());
-                 context.go("/consumer");
+                 // context.go(AppRouterConstants.homeConsumer);
                 },
               )
             ],

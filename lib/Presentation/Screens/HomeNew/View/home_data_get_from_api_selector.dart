@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/Model/user_model.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/Provider/user_provider.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
 
 import 'package:simple_flutter_project/config/app_constant.dart';
 
 class HomeAPISelector extends StatelessWidget {
-  const HomeAPISelector({super.key});
+  String? screenName;
+   HomeAPISelector({required this.screenName,super.key});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     // final Color color = AppConstant(context).getColor;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text(
-          'Users in Selector',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
+      key: _scaffoldKey,
+      /// this is abid custom app bar
+      appBar: customAppBar(
+        appBarText: screenName!,
+        leadingIcon: Icons.menu,
+        onPressed: () {
+          _scaffoldKey.currentState!.openDrawer();
+        },
       ),
+      drawer: const CustomDrawer(),
       body: FutureBuilder(
         future: Provider.of<UserProvider>(context, listen: false).fetchUsers(),
         builder: (context, snapshot) {

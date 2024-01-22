@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
 import '../../../config/app_constant.dart';
 import '../../../l10n/Provider/localization_provider.dart';
 import '../../Theme/Provider/theme_provider.dart';
 
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  String? screenName;
+   ProfileScreen({required this.screenName,super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -17,7 +20,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isSwitched = false;
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   var textValue = 'Switch is OFF';
 
 
@@ -38,6 +41,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       "Urdu",
     ];
     return Scaffold(
+      key: _scaffoldKey,
+
+      /// this is abid custom app bar
+      appBar: customAppBar(
+        appBarText: widget.screenName!,
+        leadingIcon: Icons.menu,
+        onPressed: () {
+          _scaffoldKey.currentState!.openDrawer();
+        },
+      ),
+      drawer: const CustomDrawer(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
