@@ -177,7 +177,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               // onChanged: toggleSwitch,
               value: AppConstant.themValue,
-
               activeColor: Colors.blue,
               activeTrackColor: Colors.blueAccent,
               inactiveThumbColor: Colors.white,
