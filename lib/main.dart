@@ -16,7 +16,7 @@ import 'package:simple_flutter_project/l10n/Provider/localization_provider.dart'
 import 'Presentation/Screens/Nav_bar_drawer/View/navigation_drawer_main_screen.dart';
 import 'Presentation/routes/app_route_configs.dart';
 import 'firebase_options.dart';
-
+//Todo by waleed
 // final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
                 return MaterialApp.router(
                   routerDelegate: MyAppRouter().router.routerDelegate,
                   routeInformationParser: MyAppRouter().router.routeInformationParser,
+                  //Todo by waleed
                   // navigatorKey: navigatorKey,
                   debugShowCheckedModeBanner: false,
                   title: 'Flutter code structure',
