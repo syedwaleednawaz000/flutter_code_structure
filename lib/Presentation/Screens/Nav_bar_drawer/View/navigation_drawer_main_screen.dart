@@ -25,7 +25,7 @@ class _NavigationDrawerMainScreenState
     const CounterScreen(),
     const HomeAPIConsumer(),
     const HomeAPISelector(),
-     ProfileScreen()
+     const ProfileScreen()
   ];
 
   @override
@@ -48,6 +48,7 @@ class _NavigationDrawerMainScreenState
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
+            print("this is waleed ${index.toString()}");
             _currentIndex = index;
           });
         },
