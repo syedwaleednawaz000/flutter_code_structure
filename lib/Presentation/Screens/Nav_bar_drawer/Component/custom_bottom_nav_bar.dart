@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Main/View/selectview.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:simple_flutter_project/l10n/support_languages.dart';
+
 class CustomBottomNavBar extends StatefulWidget {
   int currentIndex;
   final Function(int) onTap;
@@ -40,11 +38,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           label: AppLocalizations.of(context)!.consumerText,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.select_all),
+          icon: const Icon(Icons.select_all),
           label:  AppLocalizations.of(context)!.selectorText,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: const Icon(Icons.person),
           label:  AppLocalizations.of(context)!.profile,
         ),
       ],

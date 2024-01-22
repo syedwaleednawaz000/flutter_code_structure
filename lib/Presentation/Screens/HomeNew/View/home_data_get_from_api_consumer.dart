@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/Provider/user_provider.dart';
-import 'package:simple_flutter_project/config/app_constant.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
 
 class HomeAPIConsumer extends StatelessWidget {
-  const HomeAPIConsumer({super.key});
-
+  String? screenName;
+   HomeAPIConsumer({required this.screenName,super.key});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     // final Color color = AppConstant(context).getColor;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Users in Consumer',
-          style: TextStyle(color:  Theme.of(context).primaryColor),
-        ),
-        backgroundColor: Colors.transparent,
+      drawer: const CustomDrawer(),
+      key: _scaffoldKey,
+      appBar: customAppBar(
+        appBarText: screenName!,
+        leadingIcon: Icons.menu,
+        onPressed: () {
+          _scaffoldKey.currentState!.openDrawer();
+        },
       ),
       body: FutureBuilder(
         future: Provider.of<UserProvider>(context, listen: false).fetchUsers(),

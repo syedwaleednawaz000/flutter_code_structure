@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
+import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
 
 import '../../../config/app_constant.dart';
 import '../../../l10n/Provider/localization_provider.dart';
@@ -11,7 +13,8 @@ import '../Main/components/language_drop_down.dart';
 enum Language { english, urdu }
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({super.key});
+  String? screenName;
+  ProfileScreen({required this.screenName,super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -19,8 +22,8 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isSwitched = false;
-
   var textValue = 'Switch is OFF';
+
   @override
   void initState() {
     // TODO: implement initState
@@ -29,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   bool isDarkMode = false;
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     List languageText = [
@@ -38,6 +41,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
       "Greek",
     ];
     return Scaffold(
+      drawer: const CustomDrawer(),
+      key: _scaffoldKey,
+
+      /// this is abid custom app bar
+      appBar: customAppBar(
+        appBarText: widget.screenName!,
+        leadingIcon: Icons.menu,
+        onPressed: () {
+          _scaffoldKey.currentState!.openDrawer();
+        },
+      ),
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: 220.w,
                   decoration: BoxDecoration(
                     color: provider.current ==
-                            languageText.indexOf(languageText[provider.current])
+                        languageText.indexOf(languageText[provider.current])
                         ? Colors.grey
                         : Colors.blue,
                     borderRadius: BorderRadius.circular(4),
@@ -107,8 +122,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Text(provider.selectedLanguage == 'ur'
                             ? 'Urdu'
                             : provider.selectedLanguage == 'el'
-                                ? "Greek"
-                                : 'English'),
+                            ? "Greek"
+                            : 'English'),
                         DropdownButton<String>(
                           underline: const SizedBox(),
                           // value: languageText[provider.current].toString(),
@@ -118,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             // Save the selected index to SharedPreferences
                             SharedPreferences sp =
-                                await SharedPreferences.getInstance();
+                            await SharedPreferences.getInstance();
                             sp.setInt('selectedLanguageIndex', index);
 
                             provider.setCurrent(index);
@@ -153,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               );
             },
           ),
-          Consumer<ThemeNotifier>(builder: (context, provider, child) {
+          Consumer<ThemeProvider>(builder: (context, provider, child) {
             return Switch(
               onChanged: (bool value) async {
                 final prefs = await SharedPreferences.getInstance();
@@ -162,6 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               // onChanged: toggleSwitch,
               value: AppConstant.themValue,
+
               activeColor: Colors.blue,
               activeTrackColor: Colors.blueAccent,
               inactiveThumbColor: Colors.white,
