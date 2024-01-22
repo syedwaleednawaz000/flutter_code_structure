@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/Provider/counter_provider.dart';
@@ -13,9 +14,10 @@ import 'package:simple_flutter_project/Presentation/Theme/Provider/theme_provide
 import 'package:simple_flutter_project/config/app_constant.dart';
 import 'package:simple_flutter_project/l10n/Provider/localization_provider.dart';
 import 'Presentation/Screens/Nav_bar_drawer/View/navigation_drawer_main_screen.dart';
+import 'Presentation/routes/app_route_configs.dart';
 import 'firebase_options.dart';
 
-final navigatorKey = GlobalKey<NavigatorState>();
+// final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,8 +54,10 @@ class MyApp extends StatelessWidget {
               splitScreenMode: true,
               builder: (context, child) {
                 final themeProvider = Provider.of<ThemeProvider>(context);
-                return MaterialApp(
-                  navigatorKey: navigatorKey,
+                return MaterialApp.router(
+                  routerDelegate: MyAppRouter().router.routerDelegate,
+                  routeInformationParser: MyAppRouter().router.routeInformationParser,
+                  // navigatorKey: navigatorKey,
                   debugShowCheckedModeBanner: false,
                   title: 'Flutter code structure',
                   theme: themeProvider.getTheme(),
@@ -68,7 +72,7 @@ class MyApp extends StatelessWidget {
                     Locale('en'), // English
                     Locale('ur'),
                   ],
-                  home: const NavigationDrawerMainScreen(),
+                  // home: const NavigationDrawerMainScreen(),
                 );
               },
             );
