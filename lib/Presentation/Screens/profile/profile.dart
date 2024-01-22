@@ -48,10 +48,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     List languageText = [
       "English",
       "Urdu",
+      "Greek",
     ];
     return Scaffold(
       body: Column(
@@ -101,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: 220.w,
                   decoration: BoxDecoration(
                     color: provider.current ==
-                        languageText.indexOf(languageText[provider.current])
+                            languageText.indexOf(languageText[provider.current])
                         ? Colors.grey
                         : Colors.blue,
                     borderRadius: BorderRadius.circular(4),
@@ -120,7 +120,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(provider.selectedLanguage == 'ur' ? 'Urdu' : 'English' ),
+                        Text(provider.selectedLanguage == 'ur'
+                            ? 'Urdu'
+                            : provider.selectedLanguage == 'el'
+                                ? "Greek"
+                                : 'English'),
                         DropdownButton<String>(
                           underline: const SizedBox(),
                           // value: languageText[provider.current].toString(),
@@ -129,7 +133,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             print("***** Selected Index $index");
 
                             // Save the selected index to SharedPreferences
-                            SharedPreferences sp = await SharedPreferences.getInstance();
+                            SharedPreferences sp =
+                                await SharedPreferences.getInstance();
                             sp.setInt('selectedLanguageIndex', index);
 
                             provider.setCurrent(index);
@@ -137,7 +142,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Locale(TranslationList[index].languageName),
                             );
                           },
-                          items: languageText.map<DropdownMenuItem<String>>((language) {
+                          items: languageText
+                              .map<DropdownMenuItem<String>>((language) {
                             return DropdownMenuItem(
                               value: language,
                               child: SizedBox(
@@ -163,7 +169,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               );
             },
           ),
-
           Consumer<ThemeNotifier>(builder: (context, provider, child) {
             return Switch(
               onChanged: (bool value) async {
@@ -196,4 +201,5 @@ class TranslationModel {
 List<TranslationModel> TranslationList = [
   TranslationModel(languageName: "en", countryName: "US"),
   TranslationModel(languageName: "ur", countryName: "PK"),
+  TranslationModel(languageName: "el", countryName: "GR"),
 ];
