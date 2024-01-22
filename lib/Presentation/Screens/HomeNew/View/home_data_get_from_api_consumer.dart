@@ -13,6 +13,7 @@ class HomeAPIConsumer extends StatelessWidget {
   Widget build(BuildContext context) {
     // final Color color = AppConstant(context).getColor;
     return Scaffold(
+      backgroundColor: Theme.of(context).cardColor,
       drawer: const CustomDrawer(),
       key: _scaffoldKey,
       appBar: customAppBar(

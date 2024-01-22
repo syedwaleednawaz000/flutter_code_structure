@@ -19,6 +19,7 @@ class CounterScreen extends StatelessWidget {
     // final Color color = AppConstant(context).getColor;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).cardColor,
         drawer: const CustomDrawer(),
         key: _scaffoldKey,
 

@@ -17,6 +17,7 @@ class HomeAPISelector extends StatelessWidget {
   Widget build(BuildContext context) {
     // final Color color = AppConstant(context).getColor;
     return Scaffold(
+      backgroundColor: Theme.of(context).cardColor,
       key: _scaffoldKey,
       /// this is abid custom app bar
       appBar: customAppBar(
