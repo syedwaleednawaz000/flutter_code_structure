@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/Provider/counter_provider.dart';
 import 'package:simple_flutter_project/Presentation/Widget/my_button.dart';
@@ -45,7 +46,9 @@ class CounterScreen extends StatelessWidget {
               }),
               MyButton(
                 title: "login",
-                onTap: () {},
+                onTap: () {
+                 context.go("/consumer");
+                },
               )
             ],
           ),
