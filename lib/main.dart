@@ -69,8 +69,9 @@ class MyApp extends StatelessWidget {
                     GlobalCupertinoLocalizations.delegate,
                   ],
                   supportedLocales: const [
-                    Locale('en'), // English
+                    Locale('en'),
                     Locale('ur'),
+                    Locale('el'),
                   ],
                   // home: const NavigationDrawerMainScreen(),
                 );

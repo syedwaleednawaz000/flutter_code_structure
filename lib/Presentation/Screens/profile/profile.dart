@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
+
 import '../../../config/app_constant.dart';
 import '../../../l10n/Provider/localization_provider.dart';
 import '../../Theme/Provider/theme_provider.dart';
+import '../Main/components/language_drop_down.dart';
 
+enum Language { english, urdu }
 
 class ProfileScreen extends StatefulWidget {
   String? screenName;
-   ProfileScreen({required this.screenName,super.key});
+  ProfileScreen({required this.screenName,super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -20,9 +22,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isSwitched = false;
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   var textValue = 'Switch is OFF';
-
 
   @override
   void initState() {
@@ -32,15 +32,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   bool isDarkMode = false;
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-
     List languageText = [
       "English",
       "Urdu",
+      "Greek",
     ];
     return Scaffold(
+      drawer: const CustomDrawer(),
       key: _scaffoldKey,
 
       /// this is abid custom app bar
@@ -51,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _scaffoldKey.currentState!.openDrawer();
         },
       ),
-      drawer: const CustomDrawer(),
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,39 +119,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(provider.selectedLanguage == 'ur' ? 'Urdu' : 'English' ),
-                        Consumer<LanguageChangeProvider>(builder: (context, languageChangeProvider, child) {
-                          return                         DropdownButton<String>(
-                            underline: const SizedBox(),
-                            onChanged: (String? selectedLanguage) async {
-                              int index = languageText.indexOf(selectedLanguage!);
-                              SharedPreferences sp = await SharedPreferences.getInstance();
-                              sp.setInt('selectedLanguageIndex', index);
-                              provider.setCurrent(index);
-                              provider.changeLanguage(
-                                Locale(languageChangeProvider.translationList[index].languageName),
-                              );
-                            },
-                            items: languageText.map<DropdownMenuItem<String>>((language) {
-                              return DropdownMenuItem(
-                                value: language,
-                                child: SizedBox(
-                                  height: 48.h,
-                                  width: 100.w,
-                                  child: Center(
-                                    child: Text(
-                                      language,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w900),
-                                    ),
+                        Text(provider.selectedLanguage == 'ur'
+                            ? 'Urdu'
+                            : provider.selectedLanguage == 'el'
+                            ? "Greek"
+                            : 'English'),
+                        DropdownButton<String>(
+                          underline: const SizedBox(),
+                          // value: languageText[provider.current].toString(),
+                          onChanged: (String? selectedLanguage) async {
+                            int index = languageText.indexOf(selectedLanguage!);
+                            print("***** Selected Index $index");
+
+                            // Save the selected index to SharedPreferences
+                            SharedPreferences sp =
+                            await SharedPreferences.getInstance();
+                            sp.setInt('selectedLanguageIndex', index);
+
+                            provider.setCurrent(index);
+                            provider.changeLanguage(
+                              Locale(TranslationList[index].languageName),
+                            );
+                          },
+                          items: languageText
+                              .map<DropdownMenuItem<String>>((language) {
+                            return DropdownMenuItem(
+                              value: language,
+                              child: SizedBox(
+                                height: 48.h,
+                                width: 100.w,
+                                child: Center(
+                                  child: Text(
+                                    language,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w900),
                                   ),
                                 ),
-                              );
-                            }).toList(),
-                          );
-                        },)
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       ],
                     ),
                   ),
@@ -158,7 +168,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               );
             },
           ),
-
           Consumer<ThemeProvider>(builder: (context, provider, child) {
             return Switch(
               onChanged: (bool value) async {
@@ -181,6 +190,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
+class TranslationModel {
+  final String languageName;
+  final String countryName;
 
+  TranslationModel({required this.languageName, required this.countryName});
+}
 
-
+List<TranslationModel> TranslationList = [
+  TranslationModel(languageName: "en", countryName: "US"),
+  TranslationModel(languageName: "ur", countryName: "PK"),
+  TranslationModel(languageName: "el", countryName: "GR"),
+];
