@@ -126,19 +126,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             : 'English'),
                         DropdownButton<String>(
                           underline: const SizedBox(),
-                          // value: languageText[provider.current].toString(),
                           onChanged: (String? selectedLanguage) async {
                             int index = languageText.indexOf(selectedLanguage!);
                             print("***** Selected Index $index");
-
-                            // Save the selected index to SharedPreferences
-                            SharedPreferences sp =
-                            await SharedPreferences.getInstance();
+                            SharedPreferences sp = await SharedPreferences.getInstance();
                             sp.setInt('selectedLanguageIndex', index);
-
                             provider.setCurrent(index);
-                            provider.changeLanguage(
-                              Locale(TranslationList[index].languageName),
+                            provider.changeLanguage(Locale(TranslationList[index].languageName),
                             );
                           },
                           items: languageText
