@@ -12,6 +12,7 @@ Future<void> initNotification() async{
   ///fetch the FCM token from this device
   final FCMToken = await _firebaseMessaging.getToken();
 
+
   ///print the FCM token from this device
   print("**************** MY TOKEN IS = $FCMToken ******************");
   initPushNotification();
