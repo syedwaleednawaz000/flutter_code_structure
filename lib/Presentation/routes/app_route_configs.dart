@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -108,15 +109,14 @@ class AppRouter {
     );
   }
   static Future<void> saveLocalData({String? screenName}) async {
-    print("this is current screen name ${screenName}");
     try {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.remove(AppRouteConstants.currentScreenName);
       sharedPreferences.setString(AppRouteConstants.currentScreenName, screenName!);
-      print("this is screen name $screenName");
-      print("this is current screen name ${sharedPreferences.getString(AppRouteConstants.currentScreenName)}");
     } catch (e) {
-      print("Error saving local data: $e");
+      if (kDebugMode) {
+        print("Error saving local data: $e");
+      }
     }
   }
   //
@@ -124,12 +124,12 @@ class AppRouter {
     try {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       if (sharedPreferences.getString(AppRouteConstants.currentScreenName) != null) {
-        print("this is not equal to $currentScreen");
         currentScreen = sharedPreferences.getString(AppRouteConstants.currentScreenName)!;
-        print("this is not equal to $currentScreen");
       }
     } catch (e) {
-      print("Error getting local data: $e");
+      if (kDebugMode) {
+        print("Error getting local data: $e");
+      }
     }
   }
 }
