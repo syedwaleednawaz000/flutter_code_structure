@@ -13,16 +13,17 @@ class SplashScreen extends StatelessWidget {
       // context.go('${AppRouter.currentScreen}');
       context.go(AppRouteConstants.navigationDrawerMainScreen);
     });
-    return  const Scaffold(
-      body: SizedBox(
+    return   Scaffold(
+      backgroundColor: Theme.of(context).cardColor,
+      body:  SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Welcome",style: TextStyle(color: Colors.black),),
-            Text("to",style: TextStyle(color: Colors.black),),
-            Text("structure",style: TextStyle(color: Colors.black),),
+            Text("Welcome",style: TextStyle(color: Theme.of(context).primaryColor),),
+            Text("to",style: TextStyle(color: Theme.of(context).primaryColor),),
+            Text("structure",style: TextStyle(color: Theme.of(context).primaryColor),),
           ],
         ),
       ),

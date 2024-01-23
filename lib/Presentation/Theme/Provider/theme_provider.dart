@@ -32,7 +32,7 @@ class ThemeProvider with ChangeNotifier {
   ThemeData? getTheme() => _themeData;
 
   // Todo my code
-  ThemeProvider() {
+  Future<void> initializeTheme() async {
     getStoreValue().then((themeBoolValue) {
       var themeMode = themeBoolValue ?? true; // Change the default to true (dark theme)
       if (themeMode == false) {

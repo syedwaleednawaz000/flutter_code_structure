@@ -45,7 +45,8 @@ class MyApp extends StatelessWidget {
       child: Builder(builder: (BuildContext context) {
         final languageProvider = Provider.of<LanguageChangeProvider>(context);
         return Consumer<ThemeProvider>(
-          builder: (context, value, child) {
+          builder: (context, themeProvider, child) {
+            themeProvider.initializeTheme();
             languageProvider.loadLocalLanguageCode();
             return ScreenUtilInit(
               designSize: const Size(393, 852),
