@@ -4,10 +4,17 @@ import 'package:flutter/material.dart';
 ///
 ///
 ///
-class AppStyle{
+class AppStyle {
   static const TextStyle heading1 = TextStyle(
     fontSize: 32.0,
     fontWeight: FontWeight.bold,
     color: Colors.black,
   );
+
+  static BoxDecoration getContainerRadios15(BuildContext context) {
+    return BoxDecoration(
+      color: Theme.of(context).cardColor,
+      borderRadius: BorderRadius.circular(15),
+    );
+  }
 }

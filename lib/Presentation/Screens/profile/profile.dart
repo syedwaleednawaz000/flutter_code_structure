@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
+import 'package:simple_flutter_project/config/app_router_constants.dart';
 
 import '../../../config/app_constant.dart';
 import '../../../l10n/Provider/localization_provider.dart';
@@ -41,11 +43,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       "Greek",
     ];
     return Scaffold(
-      drawer: const CustomDrawer(),
+      backgroundColor: Theme.of(context).cardColor,
+      drawer:  const CustomDrawer(),
       key: _scaffoldKey,
 
       /// this is abid custom app bar
       appBar: customAppBar(
+        onTapBack: (){
+          context.go(AppRouteConstants.navigationDrawerMainScreen);
+        },
         appBarText: widget.screenName!,
         leadingIcon: Icons.menu,
         onPressed: () {

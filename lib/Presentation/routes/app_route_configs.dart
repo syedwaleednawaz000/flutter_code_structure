@@ -19,7 +19,7 @@ class AppRouter {
       routes: [
         ///initial Route
         GoRoute(
-          name: AppRouterConstants.splashScreen,
+          name: AppRouteConstants.splashScreen,
           path: '/',
           pageBuilder: (context, state) {
             return const MaterialPage(
@@ -30,8 +30,8 @@ class AppRouter {
 
         ///second route
         GoRoute(
-          name: AppRouterConstants.homeView,
-          path: AppRouterConstants.homeView,
+          name: AppRouteConstants.homeView,
+          path: AppRouteConstants.homeView,
           pageBuilder: (context, state) {
             saveLocalData(screenName: state.name);
             return  MaterialPage(
@@ -42,8 +42,8 @@ class AppRouter {
           },
         ),
         GoRoute(
-          name: AppRouterConstants.navigationDrawerMainScreen,
-          path: AppRouterConstants.navigationDrawerMainScreen,
+          name: AppRouteConstants.navigationDrawerMainScreen,
+          path: AppRouteConstants.navigationDrawerMainScreen,
           pageBuilder: (context, state) {
             saveLocalData(screenName: state.name);
             return const MaterialPage(
@@ -54,8 +54,8 @@ class AppRouter {
 
         ///third route
         GoRoute(
-          name: AppRouterConstants.homeConsumer,
-          path: AppRouterConstants.homeConsumer,
+          name: AppRouteConstants.homeConsumer,
+          path: AppRouteConstants.homeConsumer,
           pageBuilder: (context, state) {
             print("this is name ${state.name}");
             saveLocalData(screenName: state.name);
@@ -69,8 +69,8 @@ class AppRouter {
 
         ///forth route
         GoRoute(
-          name: AppRouterConstants.homeSelector,
-          path: AppRouterConstants.homeSelector,
+          name: AppRouteConstants.homeSelector,
+          path: AppRouteConstants.homeSelector,
           pageBuilder: (context, state) {
             saveLocalData(screenName: state.name);
             return  MaterialPage(
@@ -81,8 +81,8 @@ class AppRouter {
           },
         ),
         GoRoute(
-          name: AppRouterConstants.profileScreen,
-          path: AppRouterConstants.profileScreen,
+          name: AppRouteConstants.profileScreen,
+          path: AppRouteConstants.profileScreen,
           pageBuilder: (context, state) {
             saveLocalData(screenName: state.name);
             return  MaterialPage(
@@ -111,10 +111,10 @@ class AppRouter {
     print("this is current screen name ${screenName}");
     try {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      sharedPreferences.remove(AppRouterConstants.currentScreenName);
-      sharedPreferences.setString(AppRouterConstants.currentScreenName, screenName!);
+      sharedPreferences.remove(AppRouteConstants.currentScreenName);
+      sharedPreferences.setString(AppRouteConstants.currentScreenName, screenName!);
       print("this is screen name $screenName");
-      print("this is current screen name ${sharedPreferences.getString(AppRouterConstants.currentScreenName)}");
+      print("this is current screen name ${sharedPreferences.getString(AppRouteConstants.currentScreenName)}");
     } catch (e) {
       print("Error saving local data: $e");
     }
@@ -123,9 +123,9 @@ class AppRouter {
   static Future<void> getLocalData() async {
     try {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      if (sharedPreferences.getString(AppRouterConstants.currentScreenName) != null) {
+      if (sharedPreferences.getString(AppRouteConstants.currentScreenName) != null) {
         print("this is not equal to $currentScreen");
-        currentScreen = sharedPreferences.getString(AppRouterConstants.currentScreenName)!;
+        currentScreen = sharedPreferences.getString(AppRouteConstants.currentScreenName)!;
         print("this is not equal to $currentScreen");
       }
     } catch (e) {

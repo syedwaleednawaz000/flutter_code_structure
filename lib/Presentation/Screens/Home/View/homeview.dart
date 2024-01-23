@@ -25,6 +25,9 @@ class CounterScreen extends StatelessWidget {
 
         /// this is abid custom app bar
         appBar: customAppBar(
+          onTapBack: (){
+            context.go(AppRouteConstants.navigationDrawerMainScreen);
+          },
           appBarText: screenName!,
           leadingIcon: Icons.menu,
           onPressed: () {
@@ -45,14 +48,6 @@ class CounterScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                  image: AssetImage(AppImages.logo),
-                )),
-              ),
               Consumer<CounterProvider>(
                   builder: (context, counterProvider, child) {
                 return Text(
@@ -63,9 +58,7 @@ class CounterScreen extends StatelessWidget {
               MyButton(
                 title: "login",
                 onTap: () {
-                  context.go(AppRouterConstants.profileScreen);
-                  // context.go(Uri(path: '/users/123', queryParameters: {'filter': 'abc'}).toString());
-                 // context.go(AppRouterConstants.homeConsumer);
+                  context.goNamed(AppRouteConstants.profileScreen);
                 },
               )
             ],
