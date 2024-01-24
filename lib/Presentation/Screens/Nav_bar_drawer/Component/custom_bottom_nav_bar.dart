@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:simple_flutter_project/my_size/my_size.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   int currentIndex;
@@ -14,18 +15,19 @@ class CustomBottomNavBar extends StatefulWidget {
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
+    MySize().init(context);
     return BottomNavigationBar(
       currentIndex: widget.currentIndex,
       onTap: widget.onTap,
       unselectedItemColor: Colors.grey,
-      unselectedLabelStyle: const TextStyle(
-        fontSize: 14,
+      unselectedLabelStyle:  TextStyle(
+        fontSize: MySize.size14,
         color: Colors.black
       ),
       backgroundColor: Colors.white,
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      selectedFontSize: 18,
+      selectedFontSize: MySize.size18,
       selectedItemColor: Colors.blue,
       items:  [
         BottomNavigationBarItem(
