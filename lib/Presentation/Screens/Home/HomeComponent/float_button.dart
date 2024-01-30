@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_flutter_project/config/app_color.dart';
+import 'package:simple_flutter_project/my_size/my_size.dart';
 
 
 class FloatButton extends StatelessWidget {
@@ -9,14 +10,15 @@ class FloatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MySize().init(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         GestureDetector(
           onTap: decrement,
           child: Container(
-            height: 50,
-            width: 50,
+            height: MySize.size50,
+            width: MySize.size50,
             decoration:  BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColor.green
@@ -27,8 +29,8 @@ class FloatButton extends StatelessWidget {
         GestureDetector(
           onTap: increment,
           child: Container(
-            height: 50,
-            width: 50,
+            height: MySize.size50,
+            width: MySize.size50,
             decoration:  BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColor.green

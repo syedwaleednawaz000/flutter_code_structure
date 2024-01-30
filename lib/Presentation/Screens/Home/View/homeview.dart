@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/Provider/counter_provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
 import 'package:simple_flutter_project/Presentation/Widget/my_button.dart';
-import 'package:simple_flutter_project/config/app_images.dart';
 import 'package:simple_flutter_project/config/app_router_constants.dart';
 import '../../Main/components/custom_app_bar.dart';
 import '../HomeComponent/float_button.dart';

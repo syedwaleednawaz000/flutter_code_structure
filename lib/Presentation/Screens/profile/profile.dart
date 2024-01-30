@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
 import 'package:simple_flutter_project/config/app_router_constants.dart';
+import 'package:simple_flutter_project/my_size/my_size.dart';
 
 import '../../../config/app_constant.dart';
 import '../../../l10n/Provider/localization_provider.dart';
@@ -37,6 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    MySize().init(context);
     List languageText = [
       "English",
       "Urdu",
@@ -65,14 +67,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           Center(
             child: Container(
-              padding: const EdgeInsets.all(8),
+              padding:  EdgeInsets.all(MySize.size8),
               child: Stack(
                 children: [
                   SizedBox(
-                    width: 120,
-                    height: 120,
+                    width: MySize.size120,
+                    height: MySize.size120,
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(MySize.size100),
                         child: const Image(
                             image: NetworkImage(
                                 "https://picsum.photos/250?image=9"))),
@@ -81,15 +83,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     bottom: 0,
                     right: 0,
                     child: Container(
-                      width: 35,
-                      height: 35,
+                      width: MySize.size35,
+                      height: MySize.size35,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
+                          borderRadius: BorderRadius.circular(MySize.size100),
                           color: Colors.blue),
-                      child: const Icon(
+                      child:  Icon(
                         Icons.edit,
                         color: Colors.black,
-                        size: 20,
+                        size: MySize.size20,
                       ),
                     ),
                   ),
@@ -100,16 +102,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Consumer<LanguageChangeProvider>(
             builder: (context, provider, child) {
               return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.h),
+                padding: EdgeInsets.symmetric(horizontal: MySize.size20),
                 child: Container(
-                  height: 48.h,
-                  width: 220.w,
+                  height: MySize.size48,
+                  width: MySize.size220,
                   decoration: BoxDecoration(
                     color: provider.current ==
                         languageText.indexOf(languageText[provider.current])
                         ? Colors.grey
                         : Colors.blue,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(MySize.size4),
                     boxShadow: const [
                       BoxShadow(
                         color: Color(0x3F000000),
@@ -120,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    padding: EdgeInsets.symmetric(horizontal: MySize.size16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,14 +148,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             return DropdownMenuItem(
                               value: language,
                               child: SizedBox(
-                                height: 48.h,
-                                width: 100.w,
+                                height: MySize.size48,
+                                width: MySize.size100,
                                 child: Center(
                                   child: Text(
                                     language,
-                                    style: const TextStyle(
+                                    style:  TextStyle(
                                         color: Colors.black,
-                                        fontSize: 14,
+                                        fontSize: MySize.size14,
                                         fontWeight: FontWeight.w900),
                                   ),
                                 ),
