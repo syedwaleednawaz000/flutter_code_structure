@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:simple_flutter_project/Language/app_translation.dart';
+
 import 'package:simple_flutter_project/my_size/my_size.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
@@ -32,20 +33,20 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       items:  [
         BottomNavigationBarItem(
           icon: const Icon(Icons.countertops),
-          label: AppLocalizations.of(context)!.counterText,
+          label: AppTranslations.of(context).counterText,
         ),
 
         BottomNavigationBarItem(
           icon: const Icon(Icons.construction),
-          label: AppLocalizations.of(context)!.consumerText,
+          label: AppTranslations.of(context).consumerText,
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.select_all),
-          label:  AppLocalizations.of(context)!.selectorText,
+          label:  AppTranslations.of(context).selectorText,
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.person),
-          label:  AppLocalizations.of(context)!.profile,
+          label:  AppTranslations.of(context).profile,
         ),
       ],
     );

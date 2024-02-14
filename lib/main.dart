@@ -1,18 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Home/Provider/counter_provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/HomeNew/Provider/user_provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/SplashScreen/Provider/splash_provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/api/firebase_api.dart';
 import 'package:simple_flutter_project/Presentation/Theme/Provider/theme_provider.dart';
-import 'package:simple_flutter_project/config/app_constant.dart';
-import 'package:simple_flutter_project/l10n/Provider/localization_provider.dart';
-import 'Presentation/Screens/Nav_bar_drawer/View/navigation_drawer_main_screen.dart';
+import 'Language/app_trans_delegat.dart';
+import 'Language/language_provider.dart';
 import 'Presentation/routes/app_route_configs.dart';
 import 'firebase_options.dart';
 
@@ -39,15 +36,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CounterProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => LanguageChangeProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
         ChangeNotifierProvider(create: (_) => SplashProvider()),
       ],
       child: Builder(builder: (BuildContext context) {
-        final languageProvider = Provider.of<LanguageChangeProvider>(context);
+        final languageProvider = Provider.of<LanguageProvider>(context);
         return Consumer<ThemeProvider>(
           builder: (context, themeProvider, child) {
             themeProvider.initializeTheme();
-            languageProvider.loadLocalLanguageCode();
+            // languageProvider.loadLocalLanguageCode();
             return ScreenUtilInit(
               designSize: const Size(393, 852),
               minTextAdapt: true,
@@ -62,18 +59,14 @@ class MyApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   title: 'Flutter code structure',
                   theme: themeProvider.getTheme(),
-                  locale: languageProvider.appLocale,
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
+                  locale: languageProvider.selectedLanguage,
+                  supportedLocales: languageProvider.supportedLanguages,
+                  localizationsDelegates: [
+                    AppTranslationsDelegate(languageProvider.selectedLanguage),
+                    ...GlobalMaterialLocalizations.delegates,
                     GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
                   ],
-                  supportedLocales: const [
-                    Locale('en'),
-                    Locale('ur'),
-                    Locale('el'),
-                  ],
+
                   // home: const NavigationDrawerMainScreen(),
                 );
               },

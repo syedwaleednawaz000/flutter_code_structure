@@ -3,13 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_flutter_project/Language/language_provider.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
 import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
 import 'package:simple_flutter_project/config/app_router_constants.dart';
 import 'package:simple_flutter_project/my_size/my_size.dart';
-
 import '../../../config/app_constant.dart';
-import '../../../l10n/Provider/localization_provider.dart';
 import '../../Theme/Provider/theme_provider.dart';
 import '../Main/components/language_drop_down.dart';
 
@@ -31,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<LanguageChangeProvider>(context, listen: false);
+    Provider.of<LanguageProvider>(context, listen: false);
   }
 
   bool isDarkMode = false;
@@ -99,77 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
-          Consumer<LanguageChangeProvider>(
-            builder: (context, provider, child) {
-              return Padding(
-                padding: EdgeInsets.symmetric(horizontal: MySize.size20),
-                child: Container(
-                  height: MySize.size48,
-                  width: MySize.size220,
-                  decoration: BoxDecoration(
-                    color: provider.current ==
-                        languageText.indexOf(languageText[provider.current])
-                        ? Colors.grey
-                        : Colors.blue,
-                    borderRadius: BorderRadius.circular(MySize.size4),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x3F000000),
-                        blurRadius: 4,
-                        offset: Offset(0, 4),
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: MySize.size16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(provider.selectedLanguage == 'ur'
-                            ? 'Urdu'
-                            : provider.selectedLanguage == 'el'
-                            ? "Greek"
-                            : 'English'),
-                        DropdownButton<String>(
-                          underline: const SizedBox(),
-                          onChanged: (String? selectedLanguage) async {
-                            int index = languageText.indexOf(selectedLanguage!);
-                            print("***** Selected Index $index");
-                            SharedPreferences sp = await SharedPreferences.getInstance();
-                            sp.setInt('selectedLanguageIndex', index);
-                            provider.setCurrent(index);
-                            provider.changeLanguage(Locale(TranslationList[index].languageName),
-                            );
-                          },
-                          items: languageText
-                              .map<DropdownMenuItem<String>>((language) {
-                            return DropdownMenuItem(
-                              value: language,
-                              child: SizedBox(
-                                height: MySize.size48,
-                                width: MySize.size100,
-                                child: Center(
-                                  child: Text(
-                                    language,
-                                    style:  TextStyle(
-                                        color: Colors.black,
-                                        fontSize: MySize.size14,
-                                        fontWeight: FontWeight.w900),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
+          LanguageDropDown(),
           Consumer<ThemeProvider>(builder: (context, provider, child) {
             return Switch(
               onChanged: (bool value) async {
@@ -190,17 +119,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
+}
+class LanguageDropDown extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    final selectedLanguage = languageProvider.selectedLanguage;
+    return DropdownButton<Locale>(
+      value: selectedLanguage,
+      onChanged: (Locale? locale) {
+        if (locale != null) {
+          languageProvider.updateLanguage(locale);
+        }
+      },
+      items: const [
+        DropdownMenuItem(
+          value: Locale('en', 'US'),
+          child: Text('English'),
+        ),
+        DropdownMenuItem(
+          value: Locale('es', 'ES'),
+          child: Text('Spanish'),
+        ),
+        DropdownMenuItem(
+          value: Locale('ur', 'PK'),
+          child: Text('Urdu'),
+        ),
+        DropdownMenuItem(
+          value: Locale('ar', 'SA'),
+          child: Text('Arabic'),
+        ),
+        DropdownMenuItem(
+          value: Locale('ko', 'KR'),
+          child: Text('Korean'),
+        ),
+      ],
+    );
+  }
 }
 
-class TranslationModel {
-  final String languageName;
-  final String countryName;
-
-  TranslationModel({required this.languageName, required this.countryName});
-}
-
-List<TranslationModel> TranslationList = [
-  TranslationModel(languageName: "en", countryName: "US"),
-  TranslationModel(languageName: "ur", countryName: "PK"),
-  TranslationModel(languageName: "el", countryName: "GR"),
-];
