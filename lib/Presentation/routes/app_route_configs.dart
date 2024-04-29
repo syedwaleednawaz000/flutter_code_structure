@@ -1,15 +1,17 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Home/View/homeview.dart';
-import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_data_get_from_api_consumer.dart';
-import 'package:simple_flutter_project/Presentation/Screens/HomeNew/View/home_data_get_from_api_selector.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Nav_bar_drawer/View/navigation_drawer_main_screen.dart';
-import 'package:simple_flutter_project/Presentation/Screens/SplashScreen/View/splash_screen.dart';
-import 'package:simple_flutter_project/Presentation/Screens/profile/profile.dart';
-import 'package:simple_flutter_project/config/app_router_constants.dart';
-
+import 'package:flutter_code_structure/Presentation/Screens/Auth/Forgot/View/forgot_screen.dart';
+import 'package:flutter_code_structure/Presentation/Screens/Auth/LogIn/View/login_screen.dart';
+import 'package:flutter_code_structure/Presentation/Screens/Auth/Registraion/View/registration_screen.dart';
+import 'package:flutter_code_structure/Presentation/Screens/Dashboard/View/dashboard.dart';
+import 'package:flutter_code_structure/Presentation/Screens/History/View/history_screen.dart';
+import 'package:flutter_code_structure/Presentation/Screens/Home/View/home_screen.dart';
+import 'package:flutter_code_structure/Presentation/Screens/SplashScreen/View/splash_screen.dart';
+import 'package:flutter_code_structure/Presentation/Screens/profile/View/profile_screen.dart';
+import 'package:flutter_code_structure/config/app_router_constants.dart';
 
 class AppRouter {
   static String currentScreen = '/';
@@ -17,8 +19,9 @@ class AppRouter {
 
   static GoRouter _buildRouter() {
     return GoRouter(
+      initialLocation: '/',
+      errorPageBuilder: (context, state) => const MaterialPage(child: Scaffold(body: Center(child: Text('Page Not Found')))),
       routes: [
-        ///initial Route
         GoRoute(
           name: AppRouteConstants.splashScreen,
           path: '/',
@@ -28,56 +31,67 @@ class AppRouter {
             );
           },
         ),
-
-        ///second route
         GoRoute(
           name: AppRouteConstants.homeView,
           path: AppRouteConstants.homeView,
           pageBuilder: (context, state) {
-            saveLocalData(screenName: state.name);
+            saveLocalData(screenName: state.name!);
             return  MaterialPage(
-              child: CounterScreen(
-                screenName: "CounterScreen",
+              child: HomeScreen(
+                screenName: "Home",
               ),
             );
           },
         ),
         GoRoute(
-          name: AppRouteConstants.navigationDrawerMainScreen,
-          path: AppRouteConstants.navigationDrawerMainScreen,
+          name: AppRouteConstants.dashBoardScreen,
+          path: AppRouteConstants.dashBoardScreen,
           pageBuilder: (context, state) {
-            saveLocalData(screenName: state.name);
+            saveLocalData(screenName: state.name!);
             return const MaterialPage(
-              child: NavigationDrawerMainScreen(),
+              child: DashBoardScreen(),
             );
           },
         ),
-
-        ///third route
         GoRoute(
-          name: AppRouteConstants.homeConsumer,
-          path: AppRouteConstants.homeConsumer,
+          name: AppRouteConstants.historyScreen,
+          path: AppRouteConstants.historyScreen,
           pageBuilder: (context, state) {
-            print("this is name ${state.name}");
-            saveLocalData(screenName: state.name);
+            saveLocalData(screenName: state.name!);
             return  MaterialPage(
-              child: HomeAPIConsumer(
-                screenName: "HomeAPIConsumer",
+              child: HistoryScreen(
+                screenName: "History",
               ),
             );
           },
         ),
-
-        ///forth route
         GoRoute(
-          name: AppRouteConstants.homeSelector,
-          path: AppRouteConstants.homeSelector,
+          name: AppRouteConstants.login,
+          path: AppRouteConstants.login,
           pageBuilder: (context, state) {
-            saveLocalData(screenName: state.name);
-            return  MaterialPage(
-              child: HomeAPISelector(
-                screenName: "HomeAPISelector",
-              ),
+            saveLocalData(screenName: state.name!);
+            return const MaterialPage(
+              child: LoginScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          name: AppRouteConstants.registration,
+          path: AppRouteConstants.registration,
+          pageBuilder: (context, state) {
+            saveLocalData(screenName: state.name!);
+            return const MaterialPage(
+              child: RegistrationScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          name: AppRouteConstants.forgot,
+          path: AppRouteConstants.forgot,
+          pageBuilder: (context, state) {
+            saveLocalData(screenName: state.name!);
+            return const MaterialPage(
+              child: ForgotPasswordScreen(),
             );
           },
         ),
@@ -85,7 +99,7 @@ class AppRouter {
           name: AppRouteConstants.profileScreen,
           path: AppRouteConstants.profileScreen,
           pageBuilder: (context, state) {
-            saveLocalData(screenName: state.name);
+            saveLocalData(screenName: state.name!);
             return  MaterialPage(
               child: ProfileScreen(
                 screenName: "ProfileScreen",
@@ -94,32 +108,21 @@ class AppRouter {
           },
         ),
       ],
-      // redirect: (BuildContext context, GoRouterState state) {
-      //   // getLocalData();
-      //   print("this direct url ${state.name}");
-      //   if (currentScreen != '') {
-      //     print("this is current screeen");
-      //     return '${currentScreen}';
-      //   } else {
-      //     print("this is current screeen error ${currentScreen} ");
-      //     print("this is current screeen error ${AppRouterConstants.navigationDrawerMainScreen} ");
-      //     return AppRouterConstants.navigationDrawerMainScreen;
-      //   }
-      // },
     );
   }
-  static Future<void> saveLocalData({String? screenName}) async {
+
+  static Future<void> saveLocalData({required String screenName}) async {
     try {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.remove(AppRouteConstants.currentScreenName);
-      sharedPreferences.setString(AppRouteConstants.currentScreenName, screenName!);
+      sharedPreferences.setString(AppRouteConstants.currentScreenName, screenName);
     } catch (e) {
       if (kDebugMode) {
         print("Error saving local data: $e");
       }
     }
   }
-  //
+
   static Future<void> getLocalData() async {
     try {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

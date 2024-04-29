@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_flutter_project/Presentation/Theme/Provider/theme_provider.dart';
+import 'package:flutter_code_structure/Presentation/Theme/Provider/theme_provider.dart';
 
 class AppConstant{
   static bool themValue = false;

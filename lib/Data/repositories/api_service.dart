@@ -1,7 +1,7 @@
 
 import 'package:dio/dio.dart';
-import 'package:simple_flutter_project/Services/api_client.dart';
-import 'package:simple_flutter_project/config/app_url.dart';
+import 'package:flutter_code_structure/Services/api_client.dart';
+import 'package:flutter_code_structure/config/app_url.dart';
 
 
 

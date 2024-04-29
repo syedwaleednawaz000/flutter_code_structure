@@ -1,5 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:simple_flutter_project/main.dart';
+import 'package:flutter_code_structure/main.dart';
 
 class FireBaseApi{
   ///Create an instance of firebase Messaging

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:simple_flutter_project/Language/app_translation.dart';
+import 'package:flutter_code_structure/Language/app_translation.dart';
 
-import 'package:simple_flutter_project/my_size/my_size.dart';
+import 'package:flutter_code_structure/my_size/my_size.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   int currentIndex;
@@ -31,18 +31,18 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       selectedFontSize: MySize.size18,
       selectedItemColor: Colors.blue,
       items:  [
-        BottomNavigationBarItem(
-          icon: const Icon(Icons.countertops),
-          label: AppTranslations.of(context).counterText,
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: "Home",
         ),
 
-        BottomNavigationBarItem(
-          icon: const Icon(Icons.construction),
-          label: AppTranslations.of(context).consumerText,
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.history),
+          label: "History",
         ),
-        BottomNavigationBarItem(
-          icon: const Icon(Icons.select_all),
-          label:  AppTranslations.of(context).selectorText,
+        const BottomNavigationBarItem(
+          icon:  Icon(Icons.chat),
+          label:  "Chat",
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.person),

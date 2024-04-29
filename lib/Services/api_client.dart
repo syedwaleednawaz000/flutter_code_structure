@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_flutter_project/config/app_constant.dart';
-import 'package:simple_flutter_project/config/app_url.dart';
+import 'package:flutter_code_structure/config/app_constant.dart';
+import 'package:flutter_code_structure/config/app_url.dart';
 
 class APIClient {
   late final prefs =  SharedPreferences.getInstance();

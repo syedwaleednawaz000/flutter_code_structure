@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:simple_flutter_project/config/app_color.dart';
-import 'package:simple_flutter_project/my_size/my_size.dart';
+import 'package:flutter_code_structure/config/app_color.dart';
+import 'package:flutter_code_structure/my_size/my_size.dart';
 
 
 class MyButton extends StatelessWidget {

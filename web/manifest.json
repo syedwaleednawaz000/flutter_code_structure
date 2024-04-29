@@ -1,6 +1,6 @@
 {
-    "name": "simple_flutter_project",
-    "short_name": "simple_flutter_project",
+    "name": "flutter_code_structure",
+    "short_name": "flutter_code_structure",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

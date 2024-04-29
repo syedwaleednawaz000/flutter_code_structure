@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_flutter_project/Language/language_provider.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_app_bar.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Main/components/custom_drawer.dart';
-import 'package:simple_flutter_project/config/app_router_constants.dart';
-import 'package:simple_flutter_project/my_size/my_size.dart';
-import '../../../config/app_constant.dart';
-import '../../Theme/Provider/theme_provider.dart';
-import '../Main/components/language_drop_down.dart';
+import 'package:flutter_code_structure/Language/language_provider.dart';
+
+import 'package:flutter_code_structure/config/app_router_constants.dart';
+import 'package:flutter_code_structure/my_size/my_size.dart';
+
+import '../../../../config/app_constant.dart';
+import '../../../Theme/Provider/theme_provider.dart';
+import '../../../Widget/custom_app_bar.dart';
+import '../../Dashboard/components/custom_drawer.dart';
+
+
 
 enum Language { english, urdu }
 
@@ -51,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       /// this is abid custom app bar
       appBar: customAppBar(
         onTapBack: (){
-          context.go(AppRouteConstants.navigationDrawerMainScreen);
+          context.go(AppRouteConstants.dashBoardScreen);
         },
         appBarText: widget.screenName!,
         leadingIcon: Icons.menu,

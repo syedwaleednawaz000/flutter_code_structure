@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_flutter_project/Language/app_translation.dart';
-import 'package:simple_flutter_project/Presentation/Screens/Main/components/list_tile_widget.dart';
+import 'package:flutter_code_structure/Language/app_translation.dart';
+import 'package:flutter_code_structure/Presentation/Screens/Dashboard/components/list_tile_widget.dart';
+
+
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({

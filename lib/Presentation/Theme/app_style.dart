@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_flutter_project/my_size/my_size.dart';
+import 'package:flutter_code_structure/my_size/my_size.dart';
 ///
 /// this class with provide an overall project text style
 ///
