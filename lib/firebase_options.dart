@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -44,41 +41,53 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDYnsMr0Ods3Y5u9USEIxJrw79tiVPzTxo',
-    appId: '1:943295536995:web:98c556a8353258842abd56',
-    messagingSenderId: '943295536995',
-    projectId: 'push-notification-f7d33',
-    authDomain: 'push-notification-f7d33.firebaseapp.com',
-    databaseURL: 'https://push-notification-f7d33-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'push-notification-f7d33.appspot.com',
+    apiKey: 'AIzaSyBdmc0YE5OmMbEbEn9pvio_BNAmg_TPBaI',
+    appId: '1:412893091737:web:5197c2d48ad25a22dc2508',
+    messagingSenderId: '412893091737',
+    projectId: 'pushnotification-ac3d9',
+    authDomain: 'pushnotification-ac3d9.firebaseapp.com',
+    storageBucket: 'pushnotification-ac3d9.appspot.com',
+    measurementId: 'G-GS5E13VE33',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCgK0qrDZwgPLAjIWJRoPM7Vt8-7-K-QNw',
-    appId: '1:943295536995:android:e05ba6c3bde951ec2abd56',
-    messagingSenderId: '943295536995',
-    projectId: 'push-notification-f7d33',
-    databaseURL: 'https://push-notification-f7d33-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'push-notification-f7d33.appspot.com',
+    apiKey: 'AIzaSyD2y1VbVILu5_jPhpOd3jsc36jPK8NJtok',
+    appId: '1:412893091737:android:8d0c55a3f7ec5ec8dc2508',
+    messagingSenderId: '412893091737',
+    projectId: 'pushnotification-ac3d9',
+    storageBucket: 'pushnotification-ac3d9.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB7l2ANDXdbvI5eAGtZrgNvITHoIjTKnu8',
-    appId: '1:943295536995:ios:95c219d2d02387dc2abd56',
-    messagingSenderId: '943295536995',
-    projectId: 'push-notification-f7d33',
-    databaseURL: 'https://push-notification-f7d33-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'push-notification-f7d33.appspot.com',
+    apiKey: 'AIzaSyA2zjq4gw32hyFVaIuAv5Xx7uTcKw9yZko',
+    appId: '1:412893091737:ios:a2a832029c40d8afdc2508',
+    messagingSenderId: '412893091737',
+    projectId: 'pushnotification-ac3d9',
+    storageBucket: 'pushnotification-ac3d9.appspot.com',
+    androidClientId: '412893091737-eg826r3rshp75r0di9jhcslcd9u9fi30.apps.googleusercontent.com',
+    iosClientId: '412893091737-veof6fg0hrrvja6qi61sj3me5mcjhhas.apps.googleusercontent.com',
     iosBundleId: 'com.example.simpleFlutterProject',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB7l2ANDXdbvI5eAGtZrgNvITHoIjTKnu8',
-    appId: '1:943295536995:ios:95c219d2d02387dc2abd56',
-    messagingSenderId: '943295536995',
-    projectId: 'push-notification-f7d33',
-    databaseURL: 'https://push-notification-f7d33-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'push-notification-f7d33.appspot.com',
+    apiKey: 'AIzaSyA2zjq4gw32hyFVaIuAv5Xx7uTcKw9yZko',
+    appId: '1:412893091737:ios:a2a832029c40d8afdc2508',
+    messagingSenderId: '412893091737',
+    projectId: 'pushnotification-ac3d9',
+    storageBucket: 'pushnotification-ac3d9.appspot.com',
+    androidClientId: '412893091737-eg826r3rshp75r0di9jhcslcd9u9fi30.apps.googleusercontent.com',
+    iosClientId: '412893091737-veof6fg0hrrvja6qi61sj3me5mcjhhas.apps.googleusercontent.com',
     iosBundleId: 'com.example.simpleFlutterProject',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBdmc0YE5OmMbEbEn9pvio_BNAmg_TPBaI',
+    appId: '1:412893091737:web:68daa934a94cc1dadc2508',
+    messagingSenderId: '412893091737',
+    projectId: 'pushnotification-ac3d9',
+    authDomain: 'pushnotification-ac3d9.firebaseapp.com',
+    storageBucket: 'pushnotification-ac3d9.appspot.com',
+    measurementId: 'G-VKWCPQ1DG8',
+  );
+
 }
