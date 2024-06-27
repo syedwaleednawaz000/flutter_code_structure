@@ -1,29 +1,29 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_code_structure/Presentation/Screens/History/Provider/history_provider.dart';
 import 'package:flutter_code_structure/Presentation/Screens/Home/Provider/home_provider.dart';
 import 'package:flutter_code_structure/Presentation/Screens/SplashScreen/Provider/splash_provider.dart';
-import 'package:flutter_code_structure/Presentation/Screens/api/firebase_api.dart';
+import 'package:flutter_code_structure/Presentation/Screens/NotificationHelper/notification_helper.dart';
 import 'package:flutter_code_structure/Presentation/Theme/Provider/theme_provider.dart';
 import 'Language/app_trans_delegat.dart';
 import 'Language/language_provider.dart';
 import 'Presentation/routes/app_route_configs.dart';
 import 'firebase_options.dart';
 
-final navigatorKey = GlobalKey<NavigatorState>();
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
-  await FireBaseApi().initNotification();
-  runApp(
-    const MyApp(),
-  );
-}
+  await Firebase.initializeApp();
 
+  final notificationHelper = NotificationHelper();
+  await notificationHelper.initialize();
+
+  runApp(const MyApp());
+}
 class MyApp extends StatelessWidget {
   // final String? locale;
 

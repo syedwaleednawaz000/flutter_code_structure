@@ -1,27 +1,184 @@
 {
   "project_info": {
-    "project_number": "943295536995",
-    "firebase_url": "https://push-notification-f7d33-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "push-notification-f7d33",
-    "storage_bucket": "push-notification-f7d33.appspot.com"
+    "project_number": "412893091737",
+    "project_id": "pushnotification-ac3d9",
+    "storage_bucket": "pushnotification-ac3d9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:943295536995:android:e05ba6c3bde951ec2abd56",
+        "mobilesdk_app_id": "1:412893091737:android:bba6faa723716aa4dc2508",
         "android_client_info": {
-          "package_name": "com.example.flutter_code_structure"
+          "package_name": "com.akdevelopers.shopenlive"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "412893091737-vm541hrj1afubec281bsnsqei0i5cm16.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.akdevelopers.shopenlive",
+            "certificate_hash": "295671527f631fc73539238272fdeb0499373c1e"
+          }
+        },
+        {
+          "client_id": "412893091737-c7jfrl80asjvpd3gt0bhd5jfq61etoiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCgK0qrDZwgPLAjIWJRoPM7Vt8-7-K-QNw"
+          "current_key": "AIzaSyD2y1VbVILu5_jPhpOd3jsc36jPK8NJtok"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412893091737-c7jfrl80asjvpd3gt0bhd5jfq61etoiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412893091737:android:8d0c55a3f7ec5ec8dc2508",
+        "android_client_info": {
+          "package_name": "com.example.code_structure"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412893091737-eg826r3rshp75r0di9jhcslcd9u9fi30.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.code_structure",
+            "certificate_hash": "295671527f631fc73539238272fdeb0499373c1e"
+          }
+        },
+        {
+          "client_id": "412893091737-c7jfrl80asjvpd3gt0bhd5jfq61etoiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2y1VbVILu5_jPhpOd3jsc36jPK8NJtok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412893091737-c7jfrl80asjvpd3gt0bhd5jfq61etoiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412893091737:android:756df7f91dbfe4c4dc2508",
+        "android_client_info": {
+          "package_name": "com.example.push_notification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412893091737-nmq9o0hcquk61efoda43ovnl11dcjlbr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.push_notification",
+            "certificate_hash": "295671527f631fc73539238272fdeb0499373c1e"
+          }
+        },
+        {
+          "client_id": "412893091737-c7jfrl80asjvpd3gt0bhd5jfq61etoiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2y1VbVILu5_jPhpOd3jsc36jPK8NJtok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412893091737-c7jfrl80asjvpd3gt0bhd5jfq61etoiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412893091737:android:ea317b144f3e5aa2dc2508",
+        "android_client_info": {
+          "package_name": "com.waleed.flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412893091737-iqoqrbih0sthh3k7qg2oqeva70qtcvsd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.waleed.flutter",
+            "certificate_hash": "295671527f631fc73539238272fdeb0499373c1e"
+          }
+        },
+        {
+          "client_id": "412893091737-c7jfrl80asjvpd3gt0bhd5jfq61etoiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2y1VbVILu5_jPhpOd3jsc36jPK8NJtok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412893091737-c7jfrl80asjvpd3gt0bhd5jfq61etoiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412893091737:android:8bb56b5623bd5c75dc2508",
+        "android_client_info": {
+          "package_name": "shda.sas.as"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412893091737-c7jfrl80asjvpd3gt0bhd5jfq61etoiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2y1VbVILu5_jPhpOd3jsc36jPK8NJtok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412893091737-c7jfrl80asjvpd3gt0bhd5jfq61etoiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

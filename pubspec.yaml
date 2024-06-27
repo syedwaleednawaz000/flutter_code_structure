@@ -41,6 +41,7 @@ dependencies:
   get: ^4.6.5
   shared_preferences: ^2.2.2
   http: ^0.13.6
+  flutter_local_notifications: ^17.1.2
   provider: ^6.0.4
   logger: ^2.0.2+1
   dependency_validator: ^3.2.3

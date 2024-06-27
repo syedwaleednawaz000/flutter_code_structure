@@ -11,7 +11,7 @@ class SplashScreen extends StatelessWidget {
     AppRouter.getLocalData();
     Timer(const Duration(seconds: 2), () {
       // context.go('${AppRouter.currentScreen}');
-      context.go(AppRouteConstants.login);
+      context.push(AppRouteConstants.login);
     });
     return   Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
