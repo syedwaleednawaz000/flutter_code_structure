@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_code_structure/Presentation/Stripe/stripe_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_code_structure/config/app_router_constants.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -34,6 +36,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 24.0),
             ElevatedButton(
               onPressed: () {
+                // Provider.of<StripeProvider>(context,listen: false).makePayment(bookingID: "45678", requestType: "fghj", price: 56, context: context);
                 context.go(AppRouteConstants.dashBoardScreen);
               },
               child: const Text('Login'),
